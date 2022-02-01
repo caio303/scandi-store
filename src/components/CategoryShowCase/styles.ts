@@ -11,10 +11,5 @@ export const Container = styled.main`
     &>#products-list {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-
-        &>div {
-            display: flex;
-            gap: 1rem;
-        }
     }
 `
