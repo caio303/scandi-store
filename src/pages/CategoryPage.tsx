@@ -55,10 +55,12 @@ export const CategoryPage = () => {
       setLoading(false)
     },[])
 
+    
+
     return (
       <>
         <Header currentCategory={params.slug??"all"} />
-        <CategoryShowCase currentCategory={params.slug??"all"} currentCurrency={2} data={data}/>
+        <CategoryShowCase currentCategory={params.slug??"all"} currentCurrency={0} data={data}/>
       </>
     )
 }

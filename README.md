@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Scandi Store
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React app consuming graphql api (api not included in the project)
 
 ## Available Scripts
 
