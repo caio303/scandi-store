@@ -1,6 +1,7 @@
 import { consumeApi } from '../utils/consumeApi'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router'
 import { Header } from '../components/Header'
 import { DataType } from '../types'
 import { CategoryShowCase } from '../components/CategoryShowCase'
@@ -44,8 +45,13 @@ export const CategoryPage = () => {
         }
       }`
 
+      const [error,setError] = useState(false)
+
     useEffect(()=>{
       setLoading(true)
+      if(params.slug != "all" && params.slug != "tech" && params.slug != "clothes"){
+        setError(true)
+      }
       try {
         consumeApi("http://localhost:4000",query).then(
             (data) => {setData(data.data)}
@@ -56,18 +62,23 @@ export const CategoryPage = () => {
       setLoading(false)
     },[])
 
-    return (
-        <>
-          <Header 
-            currentCategory={params.slug??"all"} 
-            currentCurrency={0}
-            />
-          <CategoryShowCase 
-            currentCategory={params.slug??"all"} 
-            currentCurrency={0} 
-            data={data}
-            isLoading={loading}
-            />
-        </>
-    )
+    if(error === true) return <Navigate to="/"/>
+    else{
+      return (
+          <>
+            <Header 
+              currentCategory={params.slug??"all"} 
+              currentCurrency={0}
+              />
+            <CategoryShowCase 
+              currentCategory={params.slug??"all"} 
+              currentCurrency={0} 
+              data={data}
+              isLoading={loading}
+              />
+          </>
+      )
+
+    }
+
 }
