@@ -25,11 +25,25 @@ export const Container = styled.header`
             padding: 0 1rem;
             display: flex;
             align-items: center;
+            position: relative;
+            cursor: pointer;
 
             &.active {
                 color: var(--active-green);
                 border-bottom: .15rem solid var(--active-green);
             }
+
+            .fa-angle-down {
+                position: absolute;
+                top: 50%;
+                left: 80%;
+                transform: translateY(-50%);
+            }
+        }
+
+        &#currency-cart {
+            font-size: 1.25rem;
+            font-weight: 500;
         }
     }
 `

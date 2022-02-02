@@ -11,7 +11,6 @@ type ShowCaseProps = {
 
 export const CategoryShowCase = (props: ShowCaseProps) => {  
 
-
     let title = props.currentCategory.charAt(0).toUpperCase()+props.currentCategory.replace(/^./,'') 
 
     if(title.match(/All/)) title = "All Products"

@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Container } from "./styles"
 
 type CategoryItemProps = {
@@ -8,9 +9,20 @@ type CategoryItemProps = {
 }
 
 export const CategoryShowCaseItem = (props:CategoryItemProps) => {
+    
+    const [cartIcon,setCartIcon] = useState(false)
+    
     return (
-        <Container>
-            <img height="100" src={props.imageSrc}/>
+        <Container 
+            onMouseEnter={()=>setCartIcon(true)}
+            onMouseLeave={()=>setCartIcon(false)}
+            >
+            <div className="image-wrapper">
+                <img src={props.imageSrc}/>
+                {cartIcon && 
+                    <div id="cart-icon"><img src="../cart-white.svg"/></div>
+                }
+            </div>
             <div>
                 <h2>{props.productName}</h2>
                 <h3>{props.currencySymbol} {props.currencyAmount}</h3>

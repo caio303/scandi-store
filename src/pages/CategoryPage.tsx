@@ -1,7 +1,6 @@
 import { consumeApi } from '../utils/consumeApi'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom' 
-import { Navigate } from 'react-router'
+import { useParams } from 'react-router-dom'
 import { Header } from '../components/Header'
 import { DataType } from '../types'
 import { CategoryShowCase } from '../components/CategoryShowCase'
@@ -59,7 +58,10 @@ export const CategoryPage = () => {
 
     return (
         <>
-          <Header currentCategory={params.slug??"all"} />
+          <Header 
+            currentCategory={params.slug??"all"} 
+            currentCurrency={0}
+            />
           <CategoryShowCase 
             currentCategory={params.slug??"all"} 
             currentCurrency={0} 

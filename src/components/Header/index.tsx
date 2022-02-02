@@ -3,7 +3,8 @@ import { useState,useEffect } from "react"
 import { Container } from "./styles"
 
 type HeaderProps = {
-    currentCategory: string
+    currentCategory: string,
+    currentCurrency: 0 | 1 | 2 | 3 | 4
 }
 
 export const Header = (props:HeaderProps) => {
@@ -30,12 +31,12 @@ export const Header = (props:HeaderProps) => {
         <>
             <Container>
                 <nav>        
-                    <div className={all}><a href="/all">ALL</a></div>
-                    <div className={tech}><a href="/tech">TECH</a></div>
-                    <div className={clothes}><a href="/clothes">CLOTHES</a></div>
+                    <div className={all}><a href="/products/all">ALL</a></div>
+                    <div className={tech}><a href="/products/tech">TECH</a></div>
+                    <div className={clothes}><a href="/products/clothes">CLOTHES</a></div>
                 </nav>
-                <nav>
-                    <div>$</div>
+                <nav id="currency-cart">
+                    <div>$<i className="fas fa-angle-down"></i></div>
                     <div><i className="fas fa-shopping-cart"></i></div>
                 </nav>
             </Container>
