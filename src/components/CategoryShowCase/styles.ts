@@ -12,4 +12,13 @@ export const Container = styled.main`
         display: grid;
         grid-template-columns: repeat(3, 1fr);
     }
+
+    & i {
+        font-size: 3rem;
+        color: var(--active-green);
+        position: absolute;
+        top: 40%;
+        left: 48.7%;
+        transform: translateX(-50%);
+    }
 `

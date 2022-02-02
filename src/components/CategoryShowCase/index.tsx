@@ -5,27 +5,39 @@ import { Container } from './styles'
 type ShowCaseProps = {
     currentCategory: string,
     currentCurrency: 0 | 1 | 2 | 3 | 4,
-    data: DataType | undefined
+    data: DataType | undefined,
+    isLoading: boolean
 }
 
 export const CategoryShowCase = (props: ShowCaseProps) => {  
 
+
+    let title = props.currentCategory.charAt(0).toUpperCase()+props.currentCategory.replace(/^./,'') 
+
+    if(title.match(/All/)) title = "All Products"
+    if(title.match(/Tech/)) title = "Tech Devices"
+    if(title.match(/Clothes/)) title = "Clothing"
+
     return (
         <Container>
-            <h2>{props.currentCategory.charAt(0).toUpperCase()+props.currentCategory.replace(/^./,'')}</h2>
-            <div id='products-list'>
-                {props.data != undefined && props.data?.category.products.map((item,index) => {
-                    return (
-                        <CategoryShowCaseItem 
-                            imageSrc={item.gallery[0]}
-                            productName={item.name}
-                            currencySymbol={item.prices[props.currentCurrency].currency.symbol}
-                            currencyAmount={item.prices[props.currentCurrency].amount}
-                            key={index}
-                        />
-                    )
-                })}
-            </div>
+            <h2>{title}</h2>
+            {props.isLoading?
+                <div><i className="fas fa-circle-notch fa-spin"></i></div>
+                :
+                <div id='products-list'>
+                    {props.data != undefined && props.data?.category.products.map((item,index) => {
+                        return (
+                            <CategoryShowCaseItem 
+                                imageSrc={item.gallery[0]}
+                                productName={item.name}
+                                currencySymbol={item.prices[props.currentCurrency].currency.symbol}
+                                currencyAmount={item.prices[props.currentCurrency].amount}
+                                key={index}
+                            />
+                        )
+                    })}
+                </div>
+            }
         </Container>
     )
 }

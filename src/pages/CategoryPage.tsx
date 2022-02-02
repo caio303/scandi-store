@@ -1,6 +1,7 @@
 import { consumeApi } from '../utils/consumeApi'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom' 
+import { Navigate } from 'react-router'
 import { Header } from '../components/Header'
 import { DataType } from '../types'
 import { CategoryShowCase } from '../components/CategoryShowCase'
@@ -43,6 +44,7 @@ export const CategoryPage = () => {
           }
         }
       }`
+
     useEffect(()=>{
       setLoading(true)
       try {
@@ -55,12 +57,15 @@ export const CategoryPage = () => {
       setLoading(false)
     },[])
 
-    
-
     return (
-      <>
-        <Header currentCategory={params.slug??"all"} />
-        <CategoryShowCase currentCategory={params.slug??"all"} currentCurrency={0} data={data}/>
-      </>
+        <>
+          <Header currentCategory={params.slug??"all"} />
+          <CategoryShowCase 
+            currentCategory={params.slug??"all"} 
+            currentCurrency={0} 
+            data={data}
+            isLoading={loading}
+            />
+        </>
     )
 }
