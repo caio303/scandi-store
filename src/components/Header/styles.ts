@@ -8,8 +8,8 @@ export const Container = styled.header`
     justify-content: space-between;
     padding: 0 10rem;
     background: url('/logo.svg');
-    background-size: 3.8rem;
-    background-position: center bottom;
+    background-size: 4rem;
+    background-position: center center;
     background-repeat: no-repeat;
 
     nav {
@@ -37,13 +37,26 @@ export const Container = styled.header`
                 position: absolute;
                 top: 50%;
                 left: 80%;
+                transition: transform .2s ease-out;
                 transform: translateY(-50%);
+                
+                &.rodar {
+                    transform: translateY(-50%) rotate(180deg);
+                }
             }
         }
 
         &#currency-cart {
             font-size: 1.25rem;
             font-weight: 500;
+            
+            div {
+                position: relative;
+            }
+
+            div#currency-modal {
+                position: absolute;
+            }
         }
     }
 `

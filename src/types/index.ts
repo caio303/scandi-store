@@ -24,4 +24,16 @@ export type DataType = {
     }
 }
 
-export type CurrentCurrencyType = 0 |  1 | 2 | 3 | 4
+export type CurrencyType = {
+    label: string,
+    symbol: string
+}
+
+export type CurrentCurrencyType = 0 | 1 | 2 | 3 | 4
+/***
+ * 0 --> USD
+ * 1 --> GBP
+ * 2 --> AUD
+ * 3 --> JPY
+ * 4 --> RUB
+ */

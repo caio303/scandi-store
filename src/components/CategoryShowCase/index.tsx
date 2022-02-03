@@ -1,10 +1,10 @@
-import { DataType } from '../../types/'
+import { CurrentCurrencyType, DataType } from '../../types/'
 import { CategoryShowCaseItem } from '../CategoryShowCaseItem'
 import { Container } from './styles'
 
 type ShowCaseProps = {
     currentCategory: string,
-    currentCurrency: 0 | 1 | 2 | 3 | 4,
+    currentCurrency: number,
     data: DataType | undefined,
     isLoading: boolean
 }
@@ -29,6 +29,7 @@ export const CategoryShowCase = (props: ShowCaseProps) => {
                             <CategoryShowCaseItem 
                                 imageSrc={item.gallery[0]}
                                 productName={item.name}
+                                productId={item.id}
                                 productInStock={item.inStock}
                                 currencySymbol={item.prices[props.currentCurrency].currency.symbol}
                                 currencyAmount={item.prices[props.currentCurrency].amount}

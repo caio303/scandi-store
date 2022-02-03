@@ -1,12 +1,18 @@
 import { consumeApi } from '../utils/consumeApi'
 import { useEffect, useState } from 'react'
+import { Dispatch,SetStateAction } from 'react'
 import { useParams } from 'react-router-dom'
 import { Navigate } from 'react-router'
 import { Header } from '../components/Header'
-import { DataType,PriceType } from '../types'
+import { CurrencyType,CurrentCurrencyType, DataType } from '../types'
 import { CategoryShowCase } from '../components/CategoryShowCase'
 
-export const CategoryPage = () => {
+type CategoryPageProps = {
+  currentCurrency: number,
+  handleCurrencyChange: Dispatch<SetStateAction<number>>
+}
+
+export const CategoryPage = (props:CategoryPageProps) => {
 
     const [data,setData] = useState<DataType>()
     const [loading,setLoading] = useState(false)
@@ -45,7 +51,7 @@ export const CategoryPage = () => {
         }
       }`
 
-      const [error,setError] = useState(false)
+    const [error,setError] = useState(false)
 
     useEffect(()=>{
       setLoading(true)
@@ -59,8 +65,14 @@ export const CategoryPage = () => {
       }catch(e) {
         console.warn(e)
       }
-      setTimeout(()=> setLoading(false) ,100)
+      setTimeout(()=> setLoading(false) ,50)
     },[])
+
+    let currencies: CurrencyType[] | undefined
+
+    currencies = data?.category.products[0].prices.map((item,index) => {
+      return item.currency
+    })
 
     if(error === true) return <Navigate to="/"/>
     else{
@@ -68,11 +80,13 @@ export const CategoryPage = () => {
           <>
             <Header 
               currentCategory={params.slug??"all"} 
-              currentCurrency={0}
+              allCurrencies={currencies}
+              currentCurrency={props.currentCurrency}
+              handleCurrencyChange={props.handleCurrencyChange}
               />
             <CategoryShowCase 
               currentCategory={params.slug??"all"} 
-              currentCurrency={0} 
+              currentCurrency={props.currentCurrency} 
               data={data}
               isLoading={loading}
               />

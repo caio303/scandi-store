@@ -1,9 +1,13 @@
-import { useState,useEffect } from "react"
+import { useState,useEffect,Dispatch,SetStateAction } from "react"
+import { CurrencyType, CurrentCurrencyType } from "../../types"
+import { CurrencyModal } from "../CurrencyModal"
 import { Container } from "./styles"
 
 type HeaderProps = {
+    allCurrencies: CurrencyType[] | undefined,
     currentCategory: string,
-    currentCurrency: 0 | 1 | 2 | 3 | 4
+    currentCurrency: number,
+    handleCurrencyChange: Dispatch<SetStateAction<number>>
 }
 
 export const Header = (props:HeaderProps) => {
@@ -26,6 +30,14 @@ export const Header = (props:HeaderProps) => {
         }
     },[])
 
+    const [isCurrModalOpen,setIsCurrModalOpen] = useState(false)
+
+    const toggleCurrencyModal = () => {
+        setIsCurrModalOpen(!isCurrModalOpen)
+    }
+
+    const symbol = props.allCurrencies? props.allCurrencies[props.currentCurrency].symbol : "$"
+
     return (
         <>
             <Container>
@@ -35,8 +47,18 @@ export const Header = (props:HeaderProps) => {
                     <div className={clothes}><a href="/products/clothes">CLOTHES</a></div>
                 </nav>
                 <nav id="currency-cart">
-                    <div>$<i className="fas fa-angle-down"></i></div>
-                    <div><i className="fas fa-shopping-cart"></i></div>
+                    <div 
+                        onClick={toggleCurrencyModal}
+                    >
+                        {symbol}<i className={`fas fa-angle-down ${isCurrModalOpen? "rodar":''}`}></i>
+                        {isCurrModalOpen &&
+                            <CurrencyModal 
+                                allCurrencies={props.allCurrencies}
+                                handleCurrentCurrencyChange={props.handleCurrencyChange}
+                                />
+                        }
+                    </div>
+                    <div><img src="/cart-black.svg" width={24} alt="Your Cart"/></div>
                 </nav>
             </Container>
         </>

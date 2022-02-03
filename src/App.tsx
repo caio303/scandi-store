@@ -7,7 +7,7 @@ import { CurrentCurrencyType } from './types';
 
 export function App() {
 
-    const [currentCurrency,setCurrentCurrency] = useState<CurrentCurrencyType>(0)
+    const [currentCurrency,setCurrentCurrency] = useState(0)
 
     return (
       <>
@@ -16,7 +16,7 @@ export function App() {
             <Route path="/cart"/>
             <Route path="/" element={<Navigate to="/products/all"/>} />
             <Route path="/products" element={<Navigate to="/products/all"/>} />
-            <Route path="/products/:slug" element={<CategoryPage/>}/>
+            <Route path="/products/:slug" element={<CategoryPage currentCurrency={currentCurrency} handleCurrencyChange={setCurrentCurrency}/>}/>
             <Route path="*" element={<Error404 />}/>
         </Routes>
         <GlobalStyle />

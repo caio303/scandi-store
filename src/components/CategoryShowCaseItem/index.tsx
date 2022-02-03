@@ -4,6 +4,7 @@ import { Container } from "./styles"
 type CategoryItemProps = {
     imageSrc: string,
     productName: string,
+    productId: string,
     productInStock: boolean,
     currencySymbol: string,
     currencyAmount: number
@@ -19,7 +20,7 @@ export const CategoryShowCaseItem = (props:CategoryItemProps) => {
             onMouseLeave={()=>setCartIcon(false)}
             >
             <div className="image-wrapper">
-                <img src={props.imageSrc}/>
+                <img src={props.imageSrc} alt={`${props.productId}'s Image`}/>
                 {!props.productInStock && 
                     <div className="stock">OUT OF STOCK</div>
                 }
