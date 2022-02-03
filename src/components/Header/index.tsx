@@ -62,7 +62,7 @@ export const Header = (props:HeaderProps) => {
                     </div>
                     <div onClick={()=>props.setMyCart([])}>
                         <img src="/cart-black.svg" width={24} alt="Your Cart"/>
-                        <div className={props.myCart.length > 0? "visible":""}>{props.myCart.length}</div>
+                        <div id="counter" className={props.myCart.length > 0? "visible":""}>{props.myCart.length}</div>
                     </div>
                 </nav>
             </Container>

@@ -55,7 +55,7 @@ export const Container = styled.header`
             }
 
             &>div:last-child {
-                & :last-child {
+                & #counter {
                     visibility: hidden;
                     background-color: var(--text-black);
                     color: white;
