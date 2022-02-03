@@ -1,5 +1,5 @@
 import { useState,useEffect,Dispatch,SetStateAction } from "react"
-import { CurrencyType, CurrentCurrencyType } from "../../types"
+import { CurrencyType,ProductType } from "../../types"
 import { CurrencyModal } from "../CurrencyModal"
 import { Container } from "./styles"
 
@@ -7,7 +7,9 @@ type HeaderProps = {
     allCurrencies: CurrencyType[] | undefined,
     currentCategory: string,
     currentCurrency: number,
-    handleCurrencyChange: Dispatch<SetStateAction<number>>
+    handleCurrencyChange: Dispatch<SetStateAction<number>>,
+    myCart: ProductType[] | [],
+    setMyCart: Dispatch<SetStateAction<ProductType[] | []>>
 }
 
 export const Header = (props:HeaderProps) => {
@@ -50,7 +52,7 @@ export const Header = (props:HeaderProps) => {
                     <div 
                         onClick={toggleCurrencyModal}
                     >
-                        {symbol}<i className={`fas fa-angle-down ${isCurrModalOpen? "rodar":''}`}></i>
+                        {symbol}<i className={`fas fa-angle-down ${isCurrModalOpen? "spin":''}`}></i>
                         {isCurrModalOpen &&
                             <CurrencyModal 
                                 allCurrencies={props.allCurrencies}
@@ -58,7 +60,10 @@ export const Header = (props:HeaderProps) => {
                                 />
                         }
                     </div>
-                    <div><img src="/cart-black.svg" width={24} alt="Your Cart"/></div>
+                    <div onClick={()=>props.setMyCart([])}>
+                        <img src="/cart-black.svg" width={24} alt="Your Cart"/>
+                        <div className={props.myCart.length > 0? "visible":""}>{props.myCart.length}</div>
+                    </div>
                 </nav>
             </Container>
         </>

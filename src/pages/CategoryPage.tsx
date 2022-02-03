@@ -4,12 +4,14 @@ import { Dispatch,SetStateAction } from 'react'
 import { useParams } from 'react-router-dom'
 import { Navigate } from 'react-router'
 import { Header } from '../components/Header'
-import { CurrencyType,CurrentCurrencyType, DataType } from '../types'
+import { CurrencyType, DataType, ProductType } from '../types'
 import { CategoryShowCase } from '../components/CategoryShowCase'
 
 type CategoryPageProps = {
   currentCurrency: number,
-  handleCurrencyChange: Dispatch<SetStateAction<number>>
+  handleCurrencyChange: Dispatch<SetStateAction<number>>,
+  myCart: ProductType[] | [],
+  setMyCart: Dispatch<SetStateAction<ProductType[] | []>>
 }
 
 export const CategoryPage = (props:CategoryPageProps) => {
@@ -83,12 +85,16 @@ export const CategoryPage = (props:CategoryPageProps) => {
               allCurrencies={currencies}
               currentCurrency={props.currentCurrency}
               handleCurrencyChange={props.handleCurrencyChange}
+              myCart={props.myCart}
+              setMyCart={props.setMyCart}
               />
             <CategoryShowCase 
               currentCategory={params.slug??"all"} 
               currentCurrency={props.currentCurrency} 
               data={data}
               isLoading={loading}
+              myCart={props.myCart}
+              setMyCart={props.setMyCart}
               />
           </>
       )

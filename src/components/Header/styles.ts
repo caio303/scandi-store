@@ -40,7 +40,7 @@ export const Container = styled.header`
                 transition: transform .2s ease-out;
                 transform: translateY(-50%);
                 
-                &.rodar {
+                &.spin {
                     transform: translateY(-50%) rotate(180deg);
                 }
             }
@@ -50,12 +50,29 @@ export const Container = styled.header`
             font-size: 1.25rem;
             font-weight: 500;
             
-            div {
+            &>div {
                 position: relative;
             }
 
-            div#currency-modal {
-                position: absolute;
+            &>div:last-child {
+                & :last-child {
+                    visibility: hidden;
+                    background-color: var(--text-black);
+                    color: white;
+                    font-size: .8rem;
+                    border-radius: 50%;
+                    position: absolute;
+                    padding: .3rem;
+                    top: 20%;
+                    left: 55%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    &.visible {
+                        visibility: visible;
+                    }
+                }
             }
         }
     }

@@ -7,7 +7,7 @@ export type PriceType = {
 }
 
 export type ProductType = {
-    attributes: Object[],
+    attributes: AttributeSetType[],
     brand: string,
     description: string,
     gallery: string[],
@@ -29,11 +29,14 @@ export type CurrencyType = {
     symbol: string
 }
 
-export type CurrentCurrencyType = 0 | 1 | 2 | 3 | 4
-/***
- * 0 --> USD
- * 1 --> GBP
- * 2 --> AUD
- * 3 --> JPY
- * 4 --> RUB
- */
+export type AttributeType = {
+    displayValue: String,
+    value: String,
+    id: String
+}
+
+export type AttributeSetType = {
+    name: String,
+    type: String,
+    items: AttributeType[]
+}

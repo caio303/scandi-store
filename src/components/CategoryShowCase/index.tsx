@@ -1,4 +1,5 @@
-import { CurrentCurrencyType, DataType } from '../../types/'
+import { Dispatch,SetStateAction } from 'react'
+import { DataType,ProductType } from '../../types/'
 import { CategoryShowCaseItem } from '../CategoryShowCaseItem'
 import { Container } from './styles'
 
@@ -6,7 +7,9 @@ type ShowCaseProps = {
     currentCategory: string,
     currentCurrency: number,
     data: DataType | undefined,
-    isLoading: boolean
+    isLoading: boolean,
+    myCart: ProductType[] | [],
+    setMyCart: Dispatch<SetStateAction<ProductType[]|[]>>
 }
 
 export const CategoryShowCase = (props: ShowCaseProps) => {  
@@ -33,6 +36,9 @@ export const CategoryShowCase = (props: ShowCaseProps) => {
                                 productInStock={item.inStock}
                                 currencySymbol={item.prices[props.currentCurrency].currency.symbol}
                                 currencyAmount={item.prices[props.currentCurrency].amount}
+                                myCart={props.myCart}
+                                setMyCart={props.setMyCart}
+                                currentProduct={item}
                                 key={index}
                             />
                         )

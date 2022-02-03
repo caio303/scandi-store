@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect } from "react"
-import { CurrencyType, CurrentCurrencyType } from "../../types"
+import { CurrencyType } from "../../types"
 import { Container } from "./styles"
 
 type CurrencyModalProps = {
@@ -8,6 +8,8 @@ type CurrencyModalProps = {
 }
 
 export const CurrencyModal = (props: CurrencyModalProps) => {
+
+    console.log(props.allCurrencies)
     return (
         <Container id="currency-modal">
             <ul>
