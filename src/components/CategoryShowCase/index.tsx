@@ -15,7 +15,7 @@ export const CategoryShowCase = (props: ShowCaseProps) => {
 
     if(title.match(/All/)) title = "All Products"
     if(title.match(/Tech/)) title = "Tech Devices"
-    if(title.match(/Clothes/)) title = "Clothing"
+    if(title.match(/Clothes/)) title = "Clothing Articles"
 
     return (
         <Container>
@@ -29,6 +29,7 @@ export const CategoryShowCase = (props: ShowCaseProps) => {
                             <CategoryShowCaseItem 
                                 imageSrc={item.gallery[0]}
                                 productName={item.name}
+                                productInStock={item.inStock}
                                 currencySymbol={item.prices[props.currentCurrency].currency.symbol}
                                 currencyAmount={item.prices[props.currentCurrency].amount}
                                 key={index}

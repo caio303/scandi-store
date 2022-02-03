@@ -1,3 +1,4 @@
+import { printIntrospectionSchema } from "graphql";
 import styled from "styled-components";
 
 export const Container = styled.article`
@@ -18,28 +19,48 @@ export const Container = styled.article`
         display: flex;
         align-items: center;
         justify-content: center;
+        position: relative;
+        z-index: 3;
 
         img {
             width: 20rem;
         }
-        &>div {
+
+        &>div.stock {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 50%;
+            left: 50%;
+            font-size: 1.8rem;
+            background-color: #e0e0e0;
+            opacity: .5;
+            transform: translateX(-50%) translateY(-50%);
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    .cart-icon {
             position: absolute;
             top: 68%;
-            left: 80%;
+            left: 78%;
             background-color: var(--active-green);
             border-radius: 50%;
-            padding: 1.8rem;
+            padding: 2rem;
             filter: drop-shadow(0px 4px 11px rgba(29, 31, 34, 0.1));
+            z-index: 3;
 
             &>img {
-                width: 1.8rem;
+                width: 2rem;
                 position: absolute;
                 top: 50%;
                 left: 49%;
                 transform: translateY(-50%) translateX(-50%);
             }
         }
-    }
 
     h2 {
         font-size: 1.6rem;

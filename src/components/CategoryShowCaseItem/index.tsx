@@ -4,6 +4,7 @@ import { Container } from "./styles"
 type CategoryItemProps = {
     imageSrc: string,
     productName: string,
+    productInStock: boolean,
     currencySymbol: string,
     currencyAmount: number
 }
@@ -19,10 +20,13 @@ export const CategoryShowCaseItem = (props:CategoryItemProps) => {
             >
             <div className="image-wrapper">
                 <img src={props.imageSrc}/>
-                {cartIcon && 
-                    <div id="cart-icon"><img src="../cart-white.svg"/></div>
+                {!props.productInStock && 
+                    <div className="stock">OUT OF STOCK</div>
                 }
             </div>
+            {cartIcon && 
+                    <div className="cart-icon"><img src="../cart-white.svg"/></div>
+                }
             <div>
                 <h2>{props.productName}</h2>
                 <h3>{props.currencySymbol} {props.currencyAmount}</h3>

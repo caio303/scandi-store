@@ -23,3 +23,5 @@ export type DataType = {
         products: ProductType[]
     }
 }
+
+export type CurrentCurrencyType = 0 |  1 | 2 | 3 | 4

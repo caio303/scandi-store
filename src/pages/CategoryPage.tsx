@@ -1,9 +1,9 @@
 import { consumeApi } from '../utils/consumeApi'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Navigate, useNavigate } from 'react-router'
+import { Navigate } from 'react-router'
 import { Header } from '../components/Header'
-import { DataType } from '../types'
+import { DataType,PriceType } from '../types'
 import { CategoryShowCase } from '../components/CategoryShowCase'
 
 export const CategoryPage = () => {
@@ -54,12 +54,12 @@ export const CategoryPage = () => {
       }
       try {
         consumeApi("http://localhost:4000",query).then(
-            (data) => {setData(data.data)}
+            (data) => setData(data.data)
         )
       }catch(e) {
         console.warn(e)
       }
-      setLoading(false)
+      setTimeout(()=> setLoading(false) ,100)
     },[])
 
     if(error === true) return <Navigate to="/"/>
