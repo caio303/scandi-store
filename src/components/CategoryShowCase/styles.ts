@@ -2,6 +2,25 @@ import styled from "styled-components";
 
 export const Container = styled.main`
     padding: 0 10rem 8rem 10rem;
+    position: relative;
+
+    &.cartModal-open{
+        
+        img { filter: brightness(.655) }
+
+        &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: ;
+        background-color: rgba(10,10,10,0.35);
+        overflow: hidden;
+        z-index: 3;
+    }}
 
     &>h2 {
         font-size:4rem;

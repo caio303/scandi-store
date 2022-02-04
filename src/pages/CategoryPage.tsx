@@ -99,6 +99,7 @@ export const CategoryPage = (props:CategoryPageProps) => {
               isLoading={loading}
               myCart={props.myCart}
               setMyCart={props.setMyCart}
+              isCartModalOpen={props.isCartModalOpen}
               />
           </>
       )

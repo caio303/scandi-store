@@ -9,7 +9,8 @@ type ShowCaseProps = {
     data: DataType | undefined,
     isLoading: boolean,
     myCart: InCartProductType[] | [],
-    setMyCart: Dispatch<SetStateAction<InCartProductType[]|[]>>
+    setMyCart: Dispatch<SetStateAction<InCartProductType[]|[]>>,
+    isCartModalOpen: boolean
 }
 
 export const CategoryShowCase = (props: ShowCaseProps) => {  
@@ -21,7 +22,7 @@ export const CategoryShowCase = (props: ShowCaseProps) => {
     if(title.match(/Clothes/)) title = "Clothing Articles"
 
     return (
-        <Container>
+        <Container className={props.isCartModalOpen? "cartModal-open":""}>
             <h2>{title}</h2>
             {props.isLoading?
                 <div><i className="fas fa-circle-notch fa-spin"></i></div>

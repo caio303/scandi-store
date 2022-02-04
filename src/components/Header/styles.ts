@@ -37,6 +37,7 @@ export const Container = styled.header`
                 position: absolute;
                 top: 50%;
                 left: 80%;
+                font-size: 1rem;
                 transition: transform .2s ease-out;
                 transform: translateY(-50%);
                 
@@ -49,6 +50,7 @@ export const Container = styled.header`
         &#currency-cart {
             font-size: 1.25rem;
             font-weight: 500;
+            user-select: none;
             
             &>div {
                 position: relative;

@@ -73,7 +73,10 @@ export const Header = (props:HeaderProps) => {
                             />
                         <div id="counter" className={props.myCart.length > 0? "visible":""}>{props.myCart.length}</div>
                         {props.isCartModalOpen &&
-                            <CartModal />
+                            <CartModal 
+                                myCart={props.myCart}
+                                setMyCart={props.setMyCart}
+                                />
                         }
                     </div>
                 </nav>
