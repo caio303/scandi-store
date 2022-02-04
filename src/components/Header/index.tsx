@@ -1,5 +1,6 @@
 import { useState,useEffect,Dispatch,SetStateAction } from "react"
 import { CurrencyType,InCartProductType } from "../../types"
+import { CartModal } from "../CartModal"
 import { CurrencyModal } from "../CurrencyModal"
 import { Container } from "./styles"
 
@@ -9,14 +10,16 @@ type HeaderProps = {
     currentCurrency: number,
     handleCurrencyChange: Dispatch<SetStateAction<number>>,
     myCart: InCartProductType[] | [],
-    setMyCart: Dispatch<SetStateAction<InCartProductType[] | []>>
+    setMyCart: Dispatch<SetStateAction<InCartProductType[] | []>>,
+    isCartModalOpen: boolean,
+    setIsCartModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
 export const Header = (props:HeaderProps) => {
 
-    var [all,setAll] = useState('')
-    var [tech,setTech] = useState('')
-    var [clothes,setClothes] = useState('')
+    const [all,setAll] = useState('')
+    const [tech,setTech] = useState('')
+    const [clothes,setClothes] = useState('')
 
     useEffect(()=>{
         switch (props.currentCategory) {
@@ -34,14 +37,15 @@ export const Header = (props:HeaderProps) => {
 
     const [isCurrModalOpen,setIsCurrModalOpen] = useState(false)
 
-    const toggleCurrencyModal = () => {
-        setIsCurrModalOpen(!isCurrModalOpen)
+    const toggleModal = (isOpen:boolean,setIsOpen:Dispatch<SetStateAction<boolean>>) => {
+        if(!isOpen && props.isCartModalOpen) props.setIsCartModalOpen(false)
+        if(!isOpen && isCurrModalOpen) setIsCurrModalOpen(false)
+        setIsOpen(!isOpen)
     }
 
     const symbol = props.allCurrencies? props.allCurrencies[props.currentCurrency].symbol : "$"
 
     return (
-        <>
             <Container>
                 <nav>        
                     <div className={all}><a href="/products/all">ALL</a></div>
@@ -50,7 +54,7 @@ export const Header = (props:HeaderProps) => {
                 </nav>
                 <nav id="currency-cart">
                     <div 
-                        onClick={toggleCurrencyModal}
+                        onClick={()=>toggleModal(isCurrModalOpen,setIsCurrModalOpen)}
                     >
                         {symbol}<i className={`fas fa-angle-down ${isCurrModalOpen? "spin":''}`}></i>
                         {isCurrModalOpen &&
@@ -60,12 +64,19 @@ export const Header = (props:HeaderProps) => {
                                 />
                         }
                     </div>
-                    <div onClick={()=>props.setMyCart([])}>
-                        <img src="/cart-black.svg" width={24} alt="Your Cart"/>
+                    <div>
+                        <img 
+                            src="/cart-black.svg" 
+                            width={24} 
+                            alt="Your Cart"
+                            onClick={()=>toggleModal(props.isCartModalOpen,props.setIsCartModalOpen)}
+                            />
                         <div id="counter" className={props.myCart.length > 0? "visible":""}>{props.myCart.length}</div>
+                        {props.isCartModalOpen &&
+                            <CartModal />
+                        }
                     </div>
                 </nav>
             </Container>
-        </>
     )
 }

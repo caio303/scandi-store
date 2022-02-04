@@ -11,7 +11,9 @@ type CategoryPageProps = {
   currentCurrency: number,
   handleCurrencyChange: Dispatch<SetStateAction<number>>,
   myCart: InCartProductType[] | [],
-  setMyCart: Dispatch<SetStateAction<InCartProductType[] | []>>
+  setMyCart: Dispatch<SetStateAction<InCartProductType[] | []>>,
+  isCartModalOpen: boolean,
+  setIsCartModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
 export const CategoryPage = (props:CategoryPageProps) => {
@@ -87,6 +89,8 @@ export const CategoryPage = (props:CategoryPageProps) => {
               handleCurrencyChange={props.handleCurrencyChange}
               myCart={props.myCart}
               setMyCart={props.setMyCart}
+              isCartModalOpen={props.isCartModalOpen}
+              setIsCartModalOpen={props.setIsCartModalOpen}
               />
             <CategoryShowCase 
               currentCategory={params.slug??"all"} 

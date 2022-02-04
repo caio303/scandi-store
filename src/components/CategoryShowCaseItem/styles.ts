@@ -1,4 +1,3 @@
-import { printIntrospectionSchema } from "graphql";
 import styled from "styled-components";
 
 export const Container = styled.article`
@@ -6,7 +5,7 @@ export const Container = styled.article`
     flex-direction: column;
     padding: 1rem;
     width: 100%;
-    height: 36rem;
+    height: 35rem;
     overflow: hidden;
     background: #fff;
     position: relative;

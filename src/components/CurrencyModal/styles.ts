@@ -17,7 +17,11 @@ export const Container = styled.div`
         li {
             width: 6.5rem;
             height: 3rem;
-            padding: .8rem .8rem; 
+            padding: .8rem .8rem;
+
+            &:hover {
+                filter: brightness(3);
+            }
         }
     }
 `

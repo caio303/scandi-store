@@ -55,14 +55,17 @@ export const Container = styled.header`
             }
 
             &>div:last-child {
+                
                 & #counter {
                     visibility: hidden;
                     background-color: var(--text-black);
                     color: white;
-                    font-size: .8rem;
+                    width: 1.25rem;
+                    height: 1.25rem; 
+                    font-size: .85rem;
+                    font-weight: 700;
                     border-radius: 50%;
                     position: absolute;
-                    padding: .3rem;
                     top: 20%;
                     left: 55%;
                     display: flex;

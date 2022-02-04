@@ -11,6 +11,8 @@ export function App() {
 
     const [cart,setCart] = useState<InCartProductType[]|[]>([])
 
+    const [isCartModalOpen,setIsCartModalOpen] = useState(false)
+
     useEffect(()=>{
       if(localStorage.myCart !== null) {
         let localCart = JSON.parse(localStorage.myCart)
@@ -19,9 +21,7 @@ export function App() {
     },[])
 
     useEffect(()=>{
-      if(cart !== []){
-        localStorage.myCart = JSON.stringify(cart)
-      }
+      if(cart !== []) localStorage.myCart = JSON.stringify(cart)
     },[cart])
 
     return (
@@ -32,6 +32,8 @@ export function App() {
                                                     handleCurrencyChange={setCurrentCurrency}
                                                     myCart={cart}
                                                     setMyCart={setCart}
+                                                    isCartModalOpen={isCartModalOpen}
+                                                    setIsCartModalOpen={setIsCartModalOpen}
                                                     />}/>
             <Route path="/products" element={<Navigate to="/products/all"/>} />
             <Route path="/" element={<Navigate to="/products/all"/>} />
