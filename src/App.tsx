@@ -2,24 +2,24 @@ import { GlobalStyle } from './GlobalStyles';
 import { Route, Routes,Navigate } from 'react-router-dom';
 import { CategoryPage } from './pages/CategoryPage';
 import { Error404 } from './pages/Error404';
-import { useEffect, useState } from 'react';
-import { ProductType } from './types';
+import { useState,useEffect } from 'react';
+import { InCartProductType } from './types';
 
 export function App() {
 
     const [currentCurrency,setCurrentCurrency] = useState(0)
 
-    const [cart,setCart] = useState<ProductType[]|[]>([])
+    const [cart,setCart] = useState<InCartProductType[]|[]>([])
 
     useEffect(()=>{
-      if(localStorage.myCart != null) {
+      if(localStorage.myCart !== null) {
         let localCart = JSON.parse(localStorage.myCart)
         setCart([...localCart])
       }
     },[])
 
     useEffect(()=>{
-      if(cart != []){
+      if(cart !== []){
         localStorage.myCart = JSON.stringify(cart)
       }
     },[cart])

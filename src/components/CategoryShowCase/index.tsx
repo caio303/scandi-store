@@ -1,5 +1,5 @@
 import { Dispatch,SetStateAction } from 'react'
-import { DataType,ProductType } from '../../types/'
+import { DataType,InCartProductType } from '../../types/'
 import { CategoryShowCaseItem } from '../CategoryShowCaseItem'
 import { Container } from './styles'
 
@@ -8,8 +8,8 @@ type ShowCaseProps = {
     currentCurrency: number,
     data: DataType | undefined,
     isLoading: boolean,
-    myCart: ProductType[] | [],
-    setMyCart: Dispatch<SetStateAction<ProductType[]|[]>>
+    myCart: InCartProductType[] | [],
+    setMyCart: Dispatch<SetStateAction<InCartProductType[]|[]>>
 }
 
 export const CategoryShowCase = (props: ShowCaseProps) => {  
@@ -27,7 +27,7 @@ export const CategoryShowCase = (props: ShowCaseProps) => {
                 <div><i className="fas fa-circle-notch fa-spin"></i></div>
                 :
                 <div id='products-list'>
-                    {props.data != undefined && props.data?.category.products.map((item,index) => {
+                    {props.data !== undefined && props.data?.category.products.map((item,index) => {
                         return (
                             <CategoryShowCaseItem 
                                 imageSrc={item.gallery[0]}

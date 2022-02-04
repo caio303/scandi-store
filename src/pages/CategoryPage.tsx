@@ -4,14 +4,14 @@ import { Dispatch,SetStateAction } from 'react'
 import { useParams } from 'react-router-dom'
 import { Navigate } from 'react-router'
 import { Header } from '../components/Header'
-import { CurrencyType, DataType, ProductType } from '../types'
+import { CurrencyType, DataType, InCartProductType } from '../types'
 import { CategoryShowCase } from '../components/CategoryShowCase'
 
 type CategoryPageProps = {
   currentCurrency: number,
   handleCurrencyChange: Dispatch<SetStateAction<number>>,
-  myCart: ProductType[] | [],
-  setMyCart: Dispatch<SetStateAction<ProductType[] | []>>
+  myCart: InCartProductType[] | [],
+  setMyCart: Dispatch<SetStateAction<InCartProductType[] | []>>
 }
 
 export const CategoryPage = (props:CategoryPageProps) => {
@@ -57,7 +57,7 @@ export const CategoryPage = (props:CategoryPageProps) => {
 
     useEffect(()=>{
       setLoading(true)
-      if(params.slug != "all" && params.slug != "tech" && params.slug != "clothes"){
+      if(params.slug !== "all" && params.slug !== "tech" && params.slug !== "clothes"){
         setError(true)
       }
       try {

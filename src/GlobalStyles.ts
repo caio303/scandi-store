@@ -11,10 +11,12 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-    }    
+    }
+
     body, html {
         width: 100%;
         height: 100%;
+        min-width: 1310px;
         font-family: 'Raleway', sans-serif;
         font-size: 1rem;
         -webkit-font-smoothing: antialiased;

@@ -5,7 +5,7 @@ export const Container = styled.article`
     display: flex;
     flex-direction: column;
     padding: 1rem;
-    width: 32rem;
+    width: 100%;
     height: 36rem;
     overflow: hidden;
     background: #fff;
@@ -23,7 +23,7 @@ export const Container = styled.article`
         z-index: 3;
 
         img {
-            width: 20rem;
+            width: 60%;
         }
 
         &>div.stock {

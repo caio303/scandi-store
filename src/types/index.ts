@@ -40,3 +40,8 @@ export type AttributeSetType = {
     type: String,
     items: AttributeType[]
 }
+
+export type InCartProductType = {
+    product: ProductType,
+    quantity: number
+}

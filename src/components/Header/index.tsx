@@ -1,5 +1,5 @@
 import { useState,useEffect,Dispatch,SetStateAction } from "react"
-import { CurrencyType,ProductType } from "../../types"
+import { CurrencyType,InCartProductType } from "../../types"
 import { CurrencyModal } from "../CurrencyModal"
 import { Container } from "./styles"
 
@@ -8,8 +8,8 @@ type HeaderProps = {
     currentCategory: string,
     currentCurrency: number,
     handleCurrencyChange: Dispatch<SetStateAction<number>>,
-    myCart: ProductType[] | [],
-    setMyCart: Dispatch<SetStateAction<ProductType[] | []>>
+    myCart: InCartProductType[] | [],
+    setMyCart: Dispatch<SetStateAction<InCartProductType[] | []>>
 }
 
 export const Header = (props:HeaderProps) => {

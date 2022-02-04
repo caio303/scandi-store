@@ -1,5 +1,5 @@
 import { Dispatch,SetStateAction } from "react"
-import { ProductType } from "../../types"
+import { InCartProductType, ProductType } from "../../types"
 import { useState } from "react"
 import { Container } from "./styles"
 
@@ -10,8 +10,8 @@ type CategoryItemProps = {
     productInStock: boolean,
     currencySymbol: string,
     currencyAmount: number,
-    myCart: ProductType[] | [],
-    setMyCart: Dispatch<SetStateAction<ProductType[]|[]>>,
+    myCart: InCartProductType[] | [],
+    setMyCart: Dispatch<SetStateAction<InCartProductType[]|[]>>,
     currentProduct: ProductType
 }
 
@@ -19,9 +19,36 @@ export const CategoryShowCaseItem = (props:CategoryItemProps) => {
     
     const [cartIcon,setCartIcon] = useState(false)
     
+    // Verify if the product alredy exists in the Cart
+    // If so, it changes the quantity only
+    // If not, it adds the product
     const handleAddProduct = (item: ProductType) => {
-        if(item.inStock)
-        props.setMyCart([...props.myCart,item])
+        if(!item.inStock) return
+        
+        if(props.myCart.length === 0) {
+            props.setMyCart([...props.myCart,{product:item,quantity:1}])
+            return
+        }
+
+        const inCart = props.myCart.some((item2,index) => {
+            return item2.product.id === item.id
+        })
+
+        if(inCart) {
+            props.myCart.forEach((item3,index) => {
+                if(item3.product.id === item.id) {
+                    item3.quantity += 1 
+                }
+            })
+            
+            localStorage.myCart = JSON.stringify(props.myCart)
+            
+            return
+        }
+
+        props.setMyCart([...props.myCart,{product:item,quantity:1}])
+        
+        localStorage.myCart = JSON.stringify(props.myCart)
     }
 
     return (
@@ -30,7 +57,7 @@ export const CategoryShowCaseItem = (props:CategoryItemProps) => {
             onMouseLeave={()=>setCartIcon(false)}
             >
             <div className="image-wrapper">
-                <img src={props.imageSrc} alt={`${props.productId}'s Image`}/>
+                <img src={props.imageSrc} alt={`${props.productId}`}/>
                 {!props.productInStock && 
                     <div className="stock">OUT OF STOCK</div>
                 }
@@ -40,7 +67,7 @@ export const CategoryShowCaseItem = (props:CategoryItemProps) => {
                         className="cart-icon"
                         onClick={()=>handleAddProduct(props.currentProduct)}
                     >
-                        <img src="../cart-white.svg"/>
+                        <img src="../cart-white.svg" alt="Cart"/>
                     </div>
                 }
             <div>
