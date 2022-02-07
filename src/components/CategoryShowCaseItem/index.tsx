@@ -41,6 +41,8 @@ export const CategoryShowCaseItem = (props:CategoryItemProps) => {
                 }
             })
             
+            props.setMyCart([...props.myCart])
+
             localStorage.myCart = JSON.stringify(props.myCart)
             
             return

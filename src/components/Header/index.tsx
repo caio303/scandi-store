@@ -12,7 +12,8 @@ type HeaderProps = {
     myCart: InCartProductType[] | [],
     setMyCart: Dispatch<SetStateAction<InCartProductType[] | []>>,
     isCartModalOpen: boolean,
-    setIsCartModalOpen: Dispatch<SetStateAction<boolean>>
+    setIsCartModalOpen: Dispatch<SetStateAction<boolean>>,
+    cartTotalAmount: number
 }
 
 export const Header = (props:HeaderProps) => {
@@ -76,6 +77,8 @@ export const Header = (props:HeaderProps) => {
                             <CartModal 
                                 myCart={props.myCart}
                                 setMyCart={props.setMyCart}
+                                currentCurrencySymbol={symbol}
+                                cartTotalAmount={props.cartTotalAmount}
                                 />
                         }
                     </div>

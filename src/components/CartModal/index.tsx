@@ -4,7 +4,9 @@ import { Container } from "./styles"
 
 type CartModalProps = {
     myCart: InCartProductType[] | [],
-    setMyCart: Dispatch<SetStateAction<InCartProductType[]|[]>>
+    setMyCart: Dispatch<SetStateAction<InCartProductType[]|[]>>,
+    currentCurrencySymbol: string,
+    cartTotalAmount: number
 }
 
 export const CartModal = (props: CartModalProps) => {
@@ -19,7 +21,7 @@ export const CartModal = (props: CartModalProps) => {
                 </ul>
                 <div id="cartModal-total">
                     <span>Total</span>
-                    <span>$100.00</span>
+                    <span>{props.currentCurrencySymbol} {props.cartTotalAmount}</span>
                 </div>
             </div>
 

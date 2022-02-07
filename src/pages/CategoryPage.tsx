@@ -13,7 +13,8 @@ type CategoryPageProps = {
   myCart: InCartProductType[] | [],
   setMyCart: Dispatch<SetStateAction<InCartProductType[] | []>>,
   isCartModalOpen: boolean,
-  setIsCartModalOpen: Dispatch<SetStateAction<boolean>>
+  setIsCartModalOpen: Dispatch<SetStateAction<boolean>>,
+  cartTotalAmount: number
 }
 
 export const CategoryPage = (props:CategoryPageProps) => {
@@ -91,6 +92,7 @@ export const CategoryPage = (props:CategoryPageProps) => {
               setMyCart={props.setMyCart}
               isCartModalOpen={props.isCartModalOpen}
               setIsCartModalOpen={props.setIsCartModalOpen}
+              cartTotalAmount={props.cartTotalAmount}
               />
             <CategoryShowCase 
               currentCategory={params.slug??"all"} 

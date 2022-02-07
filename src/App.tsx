@@ -13,15 +13,28 @@ export function App() {
 
     const [isCartModalOpen,setIsCartModalOpen] = useState(false)
 
+    const [totalAmount,setTotalAmount] = useState(0)
+
     useEffect(()=>{
       if(localStorage.myCart !== null) {
         let localCart = JSON.parse(localStorage.myCart)
         setCart([...localCart])
+      }else {
+        localStorage.myCart = JSON.stringify(cart)
       }
     },[])
 
-    useEffect(()=>{
+    useEffect(()=>{      
       if(cart !== []) localStorage.myCart = JSON.stringify(cart)
+      
+      let total = 0
+
+      cart.forEach((item,index) => {
+        total += item.product.prices[currentCurrency].amount * item.quantity
+      })
+
+      setTotalAmount(total)
+    
     },[cart])
 
     return (
@@ -32,6 +45,7 @@ export function App() {
                                                     handleCurrencyChange={setCurrentCurrency}
                                                     myCart={cart}
                                                     setMyCart={setCart}
+                                                    cartTotalAmount={totalAmount}
                                                     isCartModalOpen={isCartModalOpen}
                                                     setIsCartModalOpen={setIsCartModalOpen}
                                                     />}/>
