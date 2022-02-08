@@ -4,30 +4,24 @@ export const Container = styled.div`
     position: absolute;
     top: 100%;
     right: 0;
-    width: 22rem;
-    height: 30rem;
+    width: 28rem;
+    height: auto;
     padding: .8rem;
     background-color: #fff;
     font-size: .9rem;
+    font-weight: 700;
     z-index: 5;
-
-    h2 {
-        span {
-            font-size: .9em;
-            font-weight: 300;
-        }
-    }
+    cursor: default;
 
     #cartModal-list {
         font-weight: 300;
-    
+
         ul {
             margin-top: 1rem;
             list-style: none;
 
             li {
                 padding: .4rem;
-                border-bottom: 1px solid var(--text-black);
             }
         }
 
@@ -35,6 +29,7 @@ export const Container = styled.div`
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 1rem .5rem .25rem .25rem;
             
             span {
                 font-weight: 700;

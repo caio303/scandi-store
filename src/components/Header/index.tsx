@@ -77,7 +77,7 @@ export const Header = (props:HeaderProps) => {
                             <CartModal 
                                 myCart={props.myCart}
                                 setMyCart={props.setMyCart}
-                                currentCurrencySymbol={symbol}
+                                currentCurrency={props.currentCurrency}
                                 cartTotalAmount={props.cartTotalAmount}
                                 />
                         }
