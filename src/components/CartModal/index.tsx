@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react"
+import { Link } from "react-router-dom"
 import { InCartProductType } from "../../types"
 import { CartItem } from "../CartItem"
 import { Container } from "./styles"
@@ -7,7 +8,8 @@ type CartModalProps = {
     myCart: InCartProductType[] | [],
     setMyCart: Dispatch<SetStateAction<InCartProductType[]|[]>>,
     currentCurrency: number,
-    cartTotalAmount: number
+    cartTotalAmount: number,
+    setIsCartModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
 export const CartModal = (props: CartModalProps) => {
@@ -16,6 +18,10 @@ export const CartModal = (props: CartModalProps) => {
         
         const currencySymbol = props.myCart[0].product.prices[props.currentCurrency].currency.symbol
         
+        const closeCartModal = () => {
+            props.setIsCartModalOpen(false)
+        }
+
         return (
             <Container>
                 <h2>My Bag,&nbsp;<span>{props.myCart.length} items</span></h2>
@@ -41,6 +47,10 @@ export const CartModal = (props: CartModalProps) => {
                         <span>Total</span>
                         <span>{currencySymbol} {props.cartTotalAmount.toFixed(2)}</span>
                     </div>
+                    <div className="cartModal-footer">
+                        <Link onClick={closeCartModal} to="/cart">VIEW BAG</Link>
+                        <Link to="/check-out">CHECK OUT</Link>
+                    </div>
                 </div>
     
             </Container>
@@ -50,7 +60,7 @@ export const CartModal = (props: CartModalProps) => {
             <Container>
                 <h2>My Bag,&nbsp;<span>0 items :(</span></h2>
                 <div id="cartModal-list">
-                    <h1 style={{textAlign:"center",padding:"4rem 0 3rem 0"}}>Your Bag is <div style={{color: "var(--active-green)"}}>empty!</div></h1>
+                    <h1 style={{textAlign:"center",padding:"3.9rem 0 3rem 0"}}>Your Bag is <div style={{color: "var(--active-green)"}}>empty!</div></h1>
                     <h3 style={{textAlign:"center",paddingBottom:".6rem"}}>Take a look at our products!</h3>
                 </div>
             </Container>

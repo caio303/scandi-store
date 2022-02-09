@@ -32,8 +32,8 @@ export const Container = styled.article`
             top: 50%;
             left: 50%;
             font-size: 1.8rem;
-            background-color: #e0e0e0;
-            opacity: .5;
+            background-color: rgba(250,250,250,0.6); 
+            backdrop-filter: blur(.2rem);
             transform: translateX(-50%) translateY(-50%);
             border-radius: 0;
             display: flex;

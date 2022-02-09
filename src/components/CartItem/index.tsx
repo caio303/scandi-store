@@ -1,6 +1,6 @@
 import { Container } from "./styles"
 import { Dispatch,SetStateAction } from "react"
-import { InCartProductType,ProductType } from '../../types/index'
+import { InCartProductType } from '../../types/index'
 
 
 type CartItemProps = {
@@ -19,8 +19,6 @@ type CartItemProps = {
 export const CartItem = (props: CartItemProps) => {
 
     const handleReduceQuantity = (cartItem: InCartProductType) => {
-        
-        if(cartItem.quantity -1 < 0) return
         
         const index = props.myCart.findIndex((item) => item === cartItem)
         
@@ -57,12 +55,28 @@ export const CartItem = (props: CartItemProps) => {
         return
     }
 
+    const handleShowAttr = (cartItem: InCartProductType) => {
+        console.log(cartItem.product.attributes)
+    }
+
     return (
         <Container className={props.liSize === "lg"?"lg":""}>
             <div className="pLeft">
                 <div className="pName">{props.itemName}</div>
                 <div className="pAmount">{props.currencySymbol} {(props.currencyAmount * props.currentItem.quantity).toFixed(2)}</div>
-                <div className="pAttr"><span className="selected">S</span><span>M</span></div>
+                <div className="pAttr">
+                    {props.currentItem.product.attributes.length > 0 &&
+                        props.currentItem.product.attributes[0].items.map((item,index,arr) =>  {
+                            
+                            let isSelected = ""
+
+                            if(arr.indexOf(item) === 0) isSelected = "selected"
+                        
+                            return <span className={isSelected} key={index}>{item.value}</span>
+                    })
+                    }
+                    {}
+                </div>
             </div>
             <div className="pRight">
                 <div className="pQuantity">
@@ -70,7 +84,7 @@ export const CartItem = (props: CartItemProps) => {
                     {props.itemQuantity}
                     <span onClick={()=>handleReduceQuantity(props.currentItem)}>-</span>
                 </div>
-                <div className="pImg"><img alt={props.itemName} src={props.itemImage} height="100"/></div>
+                <div className="pImg"><img onClick={()=>handleShowAttr(props.currentItem)} alt={props.itemName} src={props.itemImage} height="100"/></div>
             </div>
         </Container>
     )

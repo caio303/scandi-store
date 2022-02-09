@@ -4,6 +4,7 @@ import { CategoryPage } from './pages/CategoryPage';
 import { Error404 } from './pages/Error404';
 import { useState,useEffect } from 'react';
 import { InCartProductType } from './types';
+import { CartPage } from './pages/CartPage';
 
 export function App() {
 
@@ -35,7 +36,7 @@ export function App() {
 
       setTotalAmount(total)
     
-    },[cart])
+    },[cart,currentCurrency])
 
     return (
       <>
@@ -51,9 +52,17 @@ export function App() {
                                                     />}/>
             <Route path="/products" element={<Navigate to="/products/all"/>} />
             <Route path="/" element={<Navigate to="/products/all"/>} />
-            <Route path="/product/:id"/>
-            <Route path="/cart"/>
-            <Route path="*" element={<Error404 />}/>
+            <Route path="/product/:id" />
+            <Route path="/cart" element={<CartPage 
+                                          currentCurrency={currentCurrency}
+                                          handleCurrencyChange={setCurrentCurrency}
+                                          myCart={cart}
+                                          setMyCart={setCart}
+                                          cartTotalAmount={totalAmount}
+                                          isCartModalOpen={isCartModalOpen}
+                                          setIsCartModalOpen={setIsCartModalOpen}
+                                          />}/>
+            <Route path="*" element={<Error404 />} />
         </Routes>
         <GlobalStyle />
       </>

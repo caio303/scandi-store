@@ -8,19 +8,22 @@ export const Container = styled.main`
         
         img { filter: brightness(.655) }
 
+        .stock { filter: brightness(.675);}
+
         &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-        height: ;
-        background-color: rgba(10,10,10,0.35);
-        overflow: hidden;
-        z-index: 3;
-    }}
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: ;
+            background-color: rgba(10,10,10,0.35);
+            overflow: hidden;
+            z-index: 3;
+        }
+    }
 
     &>h2 {
         font-size:4rem;

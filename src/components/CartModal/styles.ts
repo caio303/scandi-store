@@ -33,7 +33,7 @@ export const Container = styled.div`
             
             span {
                 font-weight: 700;
-                font-size: 1rem;
+                font-size: 1.2rem;
             }
         }
     

@@ -29,6 +29,7 @@ export const Container = styled.li`
         height: 100%;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         font-weight: 500;
     
         .pQuantity {
@@ -75,5 +76,34 @@ export const Container = styled.li`
 
     &:not(:last-child) {
         margin-bottom: 1.2rem;
+    }
+
+    &.lg {
+        width: ;
+        height: 18rem;
+        font-weight: 3rem;
+
+        div.pLeft {
+            font-size: 1.8rem;
+        }
+
+        div.pRight {
+            width: 16%;
+            height: 16rem;
+
+            .pQuantity {
+                height: 10rem;
+            }
+
+            .pImg {
+                img {
+                    height: 16rem;
+                }
+            }
+        }
+
+        &:not(:last-child) {
+            border-bottom: 1px solid #e0e0e0;
+        }
     }
 `
