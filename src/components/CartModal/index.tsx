@@ -12,35 +12,50 @@ type CartModalProps = {
 
 export const CartModal = (props: CartModalProps) => {
 
-    const currencySymbol = props.myCart[0].product.prices[props.currentCurrency].currency.symbol
-
-    return (
-        <Container>
-            <h2>My Bag,&nbsp;<span>{props.myCart.length} items</span></h2>
-            <div id="cartModal-list">
-                <ul>
-                    {props.myCart.map((item,index) => {
-                        return <CartItem
-                                    key={index}
-                                    liSize="sm"
-                                    itemName={item.product.name}
-                                    itemQuantity={item.quantity}
-                                    currencyAmount={item.product.prices[props.currentCurrency].amount}
-                                    currencySymbol={currencySymbol}
-                                    itemAmount={item.product.prices[props.currentCurrency].amount}
-                                    itemImage={item.product.gallery[0]}
-                                    myCart={props.myCart}
-                                    setMyCart={props.setMyCart}
-                                    currentItem={item}
-                                />
-                    })}
-                </ul>
-                <div id="cartModal-total">
-                    <span>Total</span>
-                    <span>{currencySymbol} {props.cartTotalAmount.toFixed(2)}</span>
+    if(props.myCart.length > 0) {
+        
+        const currencySymbol = props.myCart[0].product.prices[props.currentCurrency].currency.symbol
+        
+        return (
+            <Container>
+                <h2>My Bag,&nbsp;<span>{props.myCart.length} items</span></h2>
+                <div id="cartModal-list">
+                    <ul>
+                        {props.myCart.map((item,index) => {
+                            return <CartItem
+                                        key={index}
+                                        liSize="sm"
+                                        itemName={item.product.name}
+                                        itemQuantity={item.quantity}
+                                        currencyAmount={item.product.prices[props.currentCurrency].amount}
+                                        currencySymbol={currencySymbol}
+                                        itemAmount={item.product.prices[props.currentCurrency].amount}
+                                        itemImage={item.product.gallery[0]}
+                                        myCart={props.myCart}
+                                        setMyCart={props.setMyCart}
+                                        currentItem={item}
+                                    />
+                        })}
+                    </ul>
+                    <div id="cartModal-total">
+                        <span>Total</span>
+                        <span>{currencySymbol} {props.cartTotalAmount.toFixed(2)}</span>
+                    </div>
                 </div>
-            </div>
+    
+            </Container>
+        )
+    }else {
+        return(
+            <Container>
+                <h2>My Bag,&nbsp;<span>0 items :(</span></h2>
+                <div id="cartModal-list">
+                    <h1 style={{textAlign:"center",padding:"4rem 0 3rem 0"}}>Your Bag is <div style={{color: "var(--active-green)"}}>empty!</div></h1>
+                    <h3 style={{textAlign:"center",paddingBottom:".6rem"}}>Take a look at our products!</h3>
+                </div>
+            </Container>
+        )
+    }
 
-        </Container>
-    )
+    
 }

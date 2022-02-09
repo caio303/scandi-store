@@ -6,21 +6,21 @@ export const Container = styled.li`
     align-items: center;
     justify-content: space-between;
     height: 8rem;
-    font-size: 1rem;
+    font-size: 1.18rem;
 
     div.pLeft {
         width: 70%;
         height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: space-evenly;
 
         .pName {
             font-weight: 300;
         }
     
         .pAmount {
-            font-weight: 500;
+            font-weight: 700;
         }
     }
 
