@@ -35,6 +35,7 @@ export const CategoryPage = (props:CategoryPageProps) => {
             inStock,
             gallery,
             description,
+            category,
             attributes {
               name,
               type,

@@ -1,6 +1,7 @@
 import { Container } from "./styles"
 import { Dispatch,SetStateAction } from "react"
 import { InCartProductType } from '../../types/index'
+import { Link } from "react-router-dom"
 
 
 type CartItemProps = {
@@ -84,7 +85,11 @@ export const CartItem = (props: CartItemProps) => {
                     {props.itemQuantity}
                     <span onClick={()=>handleReduceQuantity(props.currentItem)}>-</span>
                 </div>
-                <div className="pImg"><img onClick={()=>handleShowAttr(props.currentItem)} alt={props.itemName} src={props.itemImage} height="100"/></div>
+                <div className="pImg">
+                    <Link to={`/product/${props.currentItem.product.id}`}>
+                        <img onClick={()=>handleShowAttr(props.currentItem)} alt={props.itemName} src={props.itemImage} height="100"/>
+                    </Link>
+                </div>
             </div>
         </Container>
     )

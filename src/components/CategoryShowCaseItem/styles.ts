@@ -19,6 +19,8 @@ export const Container = styled.article`
         align-items: center;
         justify-content: center;
         position: relative;
+        text-decoration: none;
+        color: inherit;
         z-index: 3;
 
         img {
@@ -62,13 +64,13 @@ export const Container = styled.article`
             }
         }
 
-    h2 {
+    a>h2 {
         font-size: 1.6rem;
         font-weight: 300;
         padding: 1.5rem 1rem 1rem 1rem;
     }
 
-    h3 {
+    a>h3 {
         padding: 0 1rem;
         font-size: 2rem;
         font-weight: 500;

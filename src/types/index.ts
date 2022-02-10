@@ -10,6 +10,7 @@ export type ProductType = {
     attributes: AttributeSetType[],
     brand: string,
     description: string,
+    category: string,
     gallery: string[],
     id: string,
     inStock: boolean,

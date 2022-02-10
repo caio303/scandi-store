@@ -36,6 +36,35 @@ export const Container = styled.div`
                 font-size: 1.2rem;
             }
         }
+
+        #cartModal-footer {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .5rem .5rem .1rem .5rem;
+
+
+            * {
+                padding: 1rem;
+                width: 48%;
+                font-weight: 600;
+                text-align: center;
+            }
+
+            & :first-child {
+                outline: 1px solid var(--text-black);
+                
+                &:hover { background: #eee; }
+            }
+            
+            & :not(:first-child) {
+                color: white;
+                background-color: var(--active-green);
+                
+                &:hover { filter: brightness(95%);}
+            }
+        }
     
     }
 `

@@ -5,7 +5,7 @@ export const Container = styled.main`
     position: relative;
 
     &.cartModal-open{
-        
+        user-select: none;
         img { filter: brightness(.655) }
 
         .stock { filter: brightness(.675);}
@@ -21,7 +21,7 @@ export const Container = styled.main`
             height: ;
             background-color: rgba(10,10,10,0.35);
             overflow: hidden;
-            z-index: 3;
+            z-index: 4;
         }
     }
 

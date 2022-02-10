@@ -2,6 +2,8 @@ import { Dispatch,SetStateAction } from "react"
 import { InCartProductType, ProductType } from "../../types"
 import { useState } from "react"
 import { Container } from "./styles"
+import { useNavigate } from "react-router"
+import { Link } from "react-router-dom"
 
 type CategoryItemProps = {
     imageSrc: string,
@@ -58,12 +60,15 @@ export const CategoryShowCaseItem = (props:CategoryItemProps) => {
             onMouseEnter={()=>setCartIcon(true)}
             onMouseLeave={()=>setCartIcon(false)}
             >
-            <div className="image-wrapper">
-                <img src={props.imageSrc} alt={`${props.productId}`}/>
+            <Link to={`/product/${props.productId}`} className="image-wrapper">
+                <img src={props.imageSrc} 
+                    alt={`${props.productId}`}
+                    />
+                
                 {!props.productInStock && 
                     <div className="stock">OUT OF STOCK</div>
                 }
-            </div>
+            </Link>
             {cartIcon && 
                     <div 
                         className="cart-icon"
@@ -72,10 +77,10 @@ export const CategoryShowCaseItem = (props:CategoryItemProps) => {
                         <img src="../cart-white.svg" alt="Cart"/>
                     </div>
                 }
-            <div>
+            <Link to={`/product/${props.productId}`}>
                 <h2>{props.productName}</h2>
                 <h3>{props.currencySymbol} {props.currencyAmount}</h3>
-            </div>
+            </Link>
         </Container>
     )
 }

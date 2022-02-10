@@ -27,8 +27,7 @@ export const CartPage = (props: CartPageProps) => {
               currency {
                 label,
                 symbol
-              },
-              amount
+              }
             }
           }
         }

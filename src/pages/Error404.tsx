@@ -1,6 +1,6 @@
+import React from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
-import { Header } from "../components/Header"
 
 const Container = styled.main`
     width: 72rem;
@@ -41,17 +41,19 @@ const Container = styled.main`
     }
 `
 
-export const Error404 = () => {
-    return (
-        <Container>
-            <img src="/logo.svg" alt="Scandi Store Logo" />
-            <div id="wrapper">
-                <div>
-                    <h2>Scandi Store</h2>
-                    <h1>Oops, this page does not exist...</h1>
+export class Error404 extends React.Component {
+    render() {
+        return (
+            <Container>
+                <img src="/logo.svg" alt="Scandi Store Logo" />
+                <div id="wrapper">
+                    <div>
+                        <h2>Scandi Store</h2>
+                        <h1>Oops, this page does not exist...</h1>
+                    </div>
+                    <Link to="/products/all">Check out our products!</Link>
                 </div>
-                <Link to="/products/all">Check out our products!</Link>
-            </div>
-        </Container>
-    )
+            </Container>
+        )
+    }
 }

@@ -24,7 +24,9 @@ export const CartModal = (props: CartModalProps) => {
 
         return (
             <Container>
+                
                 <h2>My Bag,&nbsp;<span>{props.myCart.length} items</span></h2>
+                
                 <div id="cartModal-list">
                     <ul>
                         {props.myCart.map((item,index) => {
@@ -47,12 +49,11 @@ export const CartModal = (props: CartModalProps) => {
                         <span>Total</span>
                         <span>{currencySymbol} {props.cartTotalAmount.toFixed(2)}</span>
                     </div>
-                    <div className="cartModal-footer">
+                    <div id="cartModal-footer">
                         <Link onClick={closeCartModal} to="/cart">VIEW BAG</Link>
                         <Link to="/check-out">CHECK OUT</Link>
                     </div>
                 </div>
-    
             </Container>
         )
     }else {

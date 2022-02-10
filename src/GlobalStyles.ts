@@ -41,6 +41,11 @@ export const GlobalStyle = createGlobalStyle`
 
     a {
         text-decoration: none;
+        color: inherit;
         &:visited { color:inherit }
+    }
+
+    ul {
+        list-style: none;
     }
 `

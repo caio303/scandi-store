@@ -21,6 +21,7 @@ export const Container = styled.li`
     
         .pAmount {
             font-weight: 700;
+            margin-bottom: .5rem;
         }
     }
 
@@ -37,6 +38,8 @@ export const Container = styled.li`
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
+            gap: .2rem;
+            user-select: none;
         }
  
         .pImg {
@@ -44,7 +47,7 @@ export const Container = styled.li`
             height: 100%;
             position: relative;
             
-            img {
+            a>img {
                 height: 6.25rem; 
                 position: absolute;
                 left: 50%;
@@ -82,6 +85,8 @@ export const Container = styled.li`
         width: ;
         height: 18rem;
         font-weight: 3rem;
+        border-top: 1px solid #e0e0e0;
+        padding: 1rem 2rem 1rem 1rem;
 
         div.pLeft {
             font-size: 1.8rem;
@@ -102,8 +107,8 @@ export const Container = styled.li`
             }
         }
 
-        &:not(:last-child) {
-            border-bottom: 1px solid #e0e0e0;
+        &:last-child {
+            margin-bottom: 3rem;
         }
     }
 `

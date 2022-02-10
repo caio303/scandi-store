@@ -5,6 +5,7 @@ import { Error404 } from './pages/Error404';
 import { useState,useEffect } from 'react';
 import { InCartProductType } from './types';
 import { CartPage } from './pages/CartPage';
+import { ProductDescriptionPage } from './pages/ProductDescriptionPage';
 
 export function App() {
 
@@ -52,7 +53,15 @@ export function App() {
                                                     />}/>
             <Route path="/products" element={<Navigate to="/products/all"/>} />
             <Route path="/" element={<Navigate to="/products/all"/>} />
-            <Route path="/product/:id" />
+            <Route path="/product/:id" element={<ProductDescriptionPage 
+                                                  cartTotalAmount={totalAmount}
+                                                  currentCurrency={currentCurrency}
+                                                  handleCurrencyChange={setCurrentCurrency}
+                                                  isCartModalOpen={isCartModalOpen}
+                                                  setIsCartModalOpen={setIsCartModalOpen}
+                                                  myCart={cart}
+                                                  setMyCart={setCart}
+                                                  />}/>
             <Route path="/cart" element={<CartPage 
                                           currentCurrency={currentCurrency}
                                           handleCurrencyChange={setCurrentCurrency}
