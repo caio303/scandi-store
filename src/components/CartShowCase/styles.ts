@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.main`
     padding: 2rem 10rem;
+    min-height: 91.6vh;
 
     h1 {
         padding: 3rem 0 1rem 1rem;
