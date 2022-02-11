@@ -1,8 +1,6 @@
 import React, { Dispatch,SetStateAction } from "react"
 import { InCartProductType, ProductType } from "../../types"
-import { useState } from "react"
 import { Container } from "./styles"
-import { useNavigate } from "react-router"
 import { Link } from "react-router-dom"
 
 type CategoryItemProps = {
