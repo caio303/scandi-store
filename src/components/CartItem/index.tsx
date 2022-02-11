@@ -1,5 +1,5 @@
 import { Container } from "./styles"
-import { Dispatch,SetStateAction } from "react"
+import React, { Dispatch,SetStateAction } from "react"
 import { InCartProductType } from '../../types/index'
 import { Link } from "react-router-dom"
 
@@ -17,80 +17,77 @@ type CartItemProps = {
     currentItem: InCartProductType
 }
 
-export const CartItem = (props: CartItemProps) => {
+export class CartItem extends React.Component<CartItemProps> {
 
-    const handleReduceQuantity = (cartItem: InCartProductType) => {
+    handleReduceQuantity = (cartItem: InCartProductType) => {
         
-        const index = props.myCart.findIndex((item) => item === cartItem)
+        const index = this.props.myCart.findIndex((item) => item === cartItem)
         
         if(cartItem.quantity -1 === 0){
             
-            props.myCart.splice(index,1)
+            this.props.myCart.splice(index,1)
             
-            const newCart = props.myCart.map(item => item)
+            const newCart = this.props.myCart.map(item => item)
             
-            props.setMyCart(newCart)
+            this.props.setMyCart(newCart)
             
             return
         }
 
-        props.myCart[index].quantity -= 1
+        this.props.myCart[index].quantity -= 1
 
-        const newCart = props.myCart.map(item => item)
+        const newCart = this.props.myCart.map(item => item)
 
-        props.setMyCart(newCart)
-
-        return
-    }
-
-    const handleIncreaseQuantity = (cartItem: InCartProductType) => {
-        
-        const index = props.myCart.findIndex((item) => item === cartItem)
-        
-        props.myCart[index].quantity += 1
-
-        const newCart = props.myCart.map(item => item)
-
-        props.setMyCart(newCart)
+        this.props.setMyCart(newCart)
 
         return
     }
 
-    const handleShowAttr = (cartItem: InCartProductType) => {
-        console.log(cartItem.product.attributes)
+    handleIncreaseQuantity = (cartItem: InCartProductType) => {
+        
+        const index = this.props.myCart.findIndex((item) => item === cartItem)
+        
+        this.props.myCart[index].quantity += 1
+
+        const newCart = this.props.myCart.map(item => item)
+
+        this.props.setMyCart(newCart)
+
+        return
     }
 
-    return (
-        <Container className={props.liSize === "lg"?"lg":""}>
-            <div className="pLeft">
-                <div className="pName">{props.itemName}</div>
-                <div className="pAmount">{props.currencySymbol} {(props.currencyAmount * props.currentItem.quantity).toFixed(2)}</div>
-                <div className="pAttr">
-                    {props.currentItem.product.attributes.length > 0 &&
-                        props.currentItem.product.attributes[0].items.map((item,index,arr) =>  {
+    render() {
+        return (
+            <Container className={this.props.liSize === "lg"?"lg":""}>
+                <div className="pLeft">
+                    <div className="pName">{this.props.itemName}</div>
+                    <div className="pAmount">{this.props.currencySymbol} {(this.props.currencyAmount * this.props.currentItem.quantity).toFixed(2)}</div>
+                    <div className="pAttr">
+                        {this.props.currentItem.product.attributes.length > 0 &&
+                            this.props.currentItem.product.attributes[0].items.map((item,index,arr) =>  {
+                                
+                                let isSelected = ""
+    
+                                if(arr.indexOf(item) === 0) isSelected = "selected"
                             
-                            let isSelected = ""
-
-                            if(arr.indexOf(item) === 0) isSelected = "selected"
-                        
-                            return <span className={isSelected} key={index}>{item.value}</span>
-                    })
-                    }
-                    {}
+                                return <span className={isSelected} key={index}>{item.value}</span>
+                            })
+                        }
+                    </div>
                 </div>
-            </div>
-            <div className="pRight">
-                <div className="pQuantity">
-                    <span onClick={()=>handleIncreaseQuantity(props.currentItem)}>+</span>
-                    {props.itemQuantity}
-                    <span onClick={()=>handleReduceQuantity(props.currentItem)}>-</span>
+                <div className="pRight">
+                    <div className="pQuantity">
+                        <span onClick={()=>this.handleIncreaseQuantity(this.props.currentItem)}>+</span>
+                        {this.props.itemQuantity}
+                        <span onClick={()=>this.handleReduceQuantity(this.props.currentItem)}>-</span>
+                    </div>
+                    <div className="pImg">
+                        <Link to={`/product/${this.props.currentItem.product.id}`}>
+                            <img alt={this.props.itemName} src={this.props.itemImage} height="100"/>
+                        </Link>
+                    </div>
                 </div>
-                <div className="pImg">
-                    <Link to={`/product/${props.currentItem.product.id}`}>
-                        <img onClick={()=>handleShowAttr(props.currentItem)} alt={props.itemName} src={props.itemImage} height="100"/>
-                    </Link>
-                </div>
-            </div>
-        </Container>
-    )
+            </Container>
+        )
+    }
 }
