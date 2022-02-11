@@ -7,7 +7,7 @@ export const Container = styled.main`
     min-height: 91.6vh;
 
     #pGallery {
-        width: 50%;
+        width: 60%;
         display: flex;
         justify-content: space-between;
 
@@ -19,8 +19,8 @@ export const Container = styled.main`
             direction: rtl;
             
             li {
-                width: 9rem;
-                height: 7rem;
+                width: 10rem;
+                height: 8rem;
                 position: relative;
                 user-select: none;
                 margin-left: 1rem;
@@ -54,11 +54,9 @@ export const Container = styled.main`
         }
 
         #pGallery-hLight {
-            width: 40rem;
-            height: 40rem;
+            width: 50rem;
+            height: 50rem;
             position: relative;
-            border: 1rem solid #fff;
-            border-top: none;
 
             img {
                 position: absolute;
@@ -76,7 +74,7 @@ export const Container = styled.main`
         display: flex;
         flex-direction: column;
         gap: 1rem;
-        max-width: 30rem; 
+        max-width: 32rem; 
 
         #pName {
             font-size: 2rem;
