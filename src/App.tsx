@@ -31,7 +31,7 @@ export function App() {
       
       let total = 0
 
-      cart.forEach((item,index) => {
+      cart.forEach((item) => {
         total += item.product.prices[currentCurrency].amount * item.quantity
       })
 

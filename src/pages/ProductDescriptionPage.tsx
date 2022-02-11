@@ -19,6 +19,8 @@ export const ProductDescriptionPage = (props:ProductDescriptionPageProps) => {
     
     const [data,setData] = useState<DataType>()
 
+    const [isLoading,setIsLoading] = useState<boolean>(false)
+
     const query = `query {
         category(input:{title:"all"}) {
           name,
@@ -51,6 +53,7 @@ export const ProductDescriptionPage = (props:ProductDescriptionPageProps) => {
       }`
 
     useEffect(()=> {
+      setIsLoading(true)
         try {
             consumeApi("http://localhost:4000",query).then(
                 (data) => setData(data.data)
@@ -58,6 +61,7 @@ export const ProductDescriptionPage = (props:ProductDescriptionPageProps) => {
           }catch(e) {
             console.warn(e)
           }
+        setIsLoading(false)
     },[])
 
     let currencies: CurrencyType[] | undefined
@@ -87,6 +91,8 @@ export const ProductDescriptionPage = (props:ProductDescriptionPageProps) => {
               currentItem={currentItem}
               currentCurrency={props.currentCurrency}
               isCartModalOpen={props.isCartModalOpen}
+              myCart={props.myCart}
+              setMyCart={props.setMyCart}
               />
         </>
     )
