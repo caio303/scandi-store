@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react"
+import React, { Dispatch, SetStateAction } from "react"
 import { CurrencyType } from "../../types"
 import { Container } from "./styles"
 
@@ -7,23 +7,25 @@ type CurrencyModalProps = {
     handleCurrentCurrencyChange: Dispatch<SetStateAction<number>>
 }
 
-export const CurrencyModal = (props: CurrencyModalProps) => {
+export class CurrencyModal extends React.Component<CurrencyModalProps> {
 
-    return (
-        <Container id="currency-modal">
-            <ul>
-                {
-                    props.allCurrencies !== undefined &&
-                    props.allCurrencies.map((item,index)=>{
-                        return  <li 
-                                    key={index}
-                                    onClick={()=>props.handleCurrentCurrencyChange(index)}
-                                    >
-                                    {item.symbol} {item.label}
-                                </li>
-                    })
-                }
-            </ul>
-        </Container>        
-    )
+    render() {
+        return (
+            <Container id="currency-modal">
+                <ul>
+                    {
+                        this.props.allCurrencies !== undefined &&
+                        this.props.allCurrencies.map((item,index)=>{
+                            return  <li 
+                                        key={index}
+                                        onClick={()=>this.props.handleCurrentCurrencyChange(index)}
+                                        >
+                                        {item.symbol} {item.label}
+                                    </li>
+                        })
+                    }
+                </ul>
+            </Container>        
+        )
+    }
 }
