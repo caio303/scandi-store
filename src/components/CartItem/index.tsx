@@ -61,7 +61,12 @@ export class CartItem extends React.Component<CartItemProps> {
             <Container className={this.props.liSize === "lg"?"lg":""}>
                 <div className="pLeft">
                     <div className="pName">{this.props.itemName}</div>
-                    <div className="pAmount">{this.props.currencySymbol} {(this.props.currencyAmount * this.props.currentItem.quantity).toFixed(2)}</div>
+                    <div className="pAmount">{this.props.currencySymbol} 
+                            {this.props.liSize === "lg"? 
+                                (this.props.currencyAmount * this.props.currentItem.quantity).toFixed(2)
+                                :
+                                (this.props.currencyAmount.toFixed(2))
+                            }</div>
                     <div className="pAttr">
                         {this.props.currentItem.product.attributes.length > 0 &&
                             this.props.currentItem.product.attributes[0].items.map((item,index,arr) =>  {
