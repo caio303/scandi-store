@@ -18,7 +18,6 @@ export const Container = styled.main`
             right: 0;
             bottom: 0;
             width: 100%;
-            height: ;
             background-color: rgba(10,10,10,0.35);
             overflow: hidden;
             z-index: 4;

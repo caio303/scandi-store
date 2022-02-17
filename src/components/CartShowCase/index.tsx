@@ -10,7 +10,8 @@ type CartShowCaseProps = {
     currentCurrency: number,
     currencySymbol: string,
     isCartModalOpen: boolean,
-    setIsCartModalOpen: Dispatch<SetStateAction<boolean>>
+    setIsCartModalOpen: Dispatch<SetStateAction<boolean>>,
+    setIsCurrModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
 export class CartShowCase extends React.Component<CartShowCaseProps> {
@@ -18,7 +19,13 @@ export class CartShowCase extends React.Component<CartShowCaseProps> {
     render() {
         if(this.props.myCart.length > 0) {
             return (
-                <Container className={this.props.isCartModalOpen? "cartModal-open":""}>
+                <Container 
+                    className={this.props.isCartModalOpen? "cartModal-open":""}
+                    onClick={()=>{
+                        this.props.setIsCartModalOpen(false)
+                        this.props.setIsCurrModalOpen(false)
+                    }}
+                    >
                     <h1>CART</h1>
                     <ul>
                         {this.props.myCart.length > 0 && this.props.myCart.map((item,index)=> {

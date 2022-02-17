@@ -68,6 +68,7 @@ export function App() {
                                                     cartTotalAmount={totalAmount}
                                                     isCartModalOpen={isCartModalOpen}
                                                     setIsCartModalOpen={setIsCartModalOpen}
+                                                    setIsCurrModalOpen={setIsCurrModalOpen}
                                                     />}/>
             <Route path="/products" element={<Navigate to="/products/all"/>} />
             <Route path="/" element={<Navigate to="/products/all"/>} />
@@ -79,6 +80,7 @@ export function App() {
                                                   setIsCartModalOpen={setIsCartModalOpen}
                                                   myCart={cart}
                                                   setMyCart={setCart}
+                                                  setIsCurrModalOpen={setIsCurrModalOpen}
                                                   />}/>
             <Route path="/cart" element={<CartPage 
                                           currentCurrency={currentCurrency}
@@ -88,6 +90,7 @@ export function App() {
                                           cartTotalAmount={totalAmount}
                                           isCartModalOpen={isCartModalOpen}
                                           setIsCartModalOpen={setIsCartModalOpen}
+                                          setIsCurrModalOpen={setIsCurrModalOpen}
                                           />}/>
             <Route path="*" element={<Error404 />} />
         </Routes>

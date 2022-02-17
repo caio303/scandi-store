@@ -1,6 +1,7 @@
 import { Dispatch,SetStateAction } from 'react'
 import { InCartProductType } from '../types/index'
 import { CartShowCase } from "../components/CartShowCase"
+import { printIntrospectionSchema } from 'graphql'
  
 
 type CartPageProps = {
@@ -10,6 +11,7 @@ type CartPageProps = {
   setMyCart: Dispatch<SetStateAction<InCartProductType[] | []>>,
   isCartModalOpen: boolean,
   setIsCartModalOpen: Dispatch<SetStateAction<boolean>>,
+  setIsCurrModalOpen: Dispatch<SetStateAction<boolean>>,
   cartTotalAmount: number
 }
 
@@ -28,6 +30,7 @@ export const CartPage = (props: CartPageProps) => {
               currentCurrency={props.currentCurrency}
               isCartModalOpen={props.isCartModalOpen}
               setIsCartModalOpen={props.setIsCartModalOpen}
+              setIsCurrModalOpen={props.setIsCurrModalOpen}
               />
         </>
     )

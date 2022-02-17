@@ -9,6 +9,8 @@ type ProductDescriptionProps = {
     isCartModalOpen: boolean,
     myCart: InCartProductType[] | [],
     setMyCart: Dispatch<SetStateAction<InCartProductType[]|[]>>,
+    setIsCartModalOpen: Dispatch<SetStateAction<boolean>>,
+    setIsCurrModalOpen: Dispatch<SetStateAction<boolean>>,
 }
 
 
@@ -83,7 +85,13 @@ export class ProductDescription extends React.Component<ProductDescriptionProps>
         if(this.props.currentItem?.category === "clothes") productCategory = "Clothing Article"
 
         return (
-            <Container className={this.props.isCartModalOpen? "cartModal-open":""}>
+            <Container 
+                className={this.props.isCartModalOpen? "cartModal-open":""}
+                onClick={()=>{
+                    this.props.setIsCartModalOpen(false)
+                    this.props.setIsCurrModalOpen(false)
+                }}
+                >
                 <div id="pGallery">
                     <ul id="pGallery-list">
                         {this.props.currentItem?.gallery.map((item,index)=> {

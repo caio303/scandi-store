@@ -12,6 +12,7 @@ type ProductDescriptionPageProps = {
     setMyCart: Dispatch<SetStateAction<InCartProductType[] | []>>,
     isCartModalOpen: boolean,
     setIsCartModalOpen: Dispatch<SetStateAction<boolean>>,
+    setIsCurrModalOpen: Dispatch<SetStateAction<boolean>>,
     cartTotalAmount: number,
 }
 
@@ -41,6 +42,8 @@ export const ProductDescriptionPage = (props:ProductDescriptionPageProps) => {
             isCartModalOpen={props.isCartModalOpen}
             myCart={props.myCart}
             setMyCart={props.setMyCart}
+            setIsCartModalOpen={props.setIsCartModalOpen}
+            setIsCurrModalOpen={props.setIsCurrModalOpen}
             />
         </>
     )
