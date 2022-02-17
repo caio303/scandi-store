@@ -20,6 +20,8 @@ export function App() {
 
     const [currentCategory, setCurrentCategory] = useState(0)
 
+    const [isCurrModalOpen,setIsCurrModalOpen] = useState(false)
+
     useEffect(()=>{
       if(localStorage.myCart !== null) {
         let localCart = JSON.parse(localStorage.myCart)
@@ -44,7 +46,7 @@ export function App() {
 
     return (
       <>
-        <Header 
+        <Header
             currentCategory={currentCategory}
             setCurrentCategory={setCurrentCategory}
             currentCurrency={currentCurrency}
@@ -54,7 +56,9 @@ export function App() {
             setMyCart={setCart}
             setIsCartModalOpen={setIsCartModalOpen}
             isCartModalOpen={isCartModalOpen}
-        />
+            isCurrModalOpen={isCurrModalOpen}
+            setIsCurrModalOpen={setIsCurrModalOpen}
+          />
         <Routes>
             <Route path="/products/:slug" element={<CategoryPage 
                                                     currentCurrency={currentCurrency}

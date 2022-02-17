@@ -27,8 +27,12 @@ export class CategoryShowCaseItem extends React.Component<CategoryItemProps> {
     handleAddProduct = (item: ProductType) => {
         if(!item.inStock) return
         
+        const selectedAttrByDefault = item.attributes.map(() => {
+            return 0
+        }) 
+
         if(this.props.myCart.length === 0) {
-            this.props.setMyCart([...this.props.myCart,{product:item,quantity:1}])
+            this.props.setMyCart([...this.props.myCart,{product:item,quantity:1,selectedAttributes:selectedAttrByDefault}])
             return
         }
 
@@ -50,7 +54,7 @@ export class CategoryShowCaseItem extends React.Component<CategoryItemProps> {
             return
         }
 
-        this.props.setMyCart([...this.props.myCart,{product:item,quantity:1}])
+        this.props.setMyCart([...this.props.myCart,{product:item,quantity:1,selectedAttributes: selectedAttrByDefault}])
         
         localStorage.myCart = JSON.stringify(this.props.myCart)
     }

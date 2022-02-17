@@ -56,6 +56,11 @@ export const Container = styled.li`
         }
     }
 
+    div.attr-name {
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+
     span {
         padding: .4rem .6rem .4rem .6rem;
         margin: 0 .3rem;

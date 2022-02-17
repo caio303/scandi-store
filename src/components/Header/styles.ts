@@ -31,6 +31,7 @@ export const Container = styled.header`
             &.active {
                 color: var(--active-green);
                 border-bottom: .15rem solid var(--active-green);
+                border-top: .15rem solid white;
             }
 
             .fa-angle-down {

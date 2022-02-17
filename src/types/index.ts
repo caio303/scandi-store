@@ -56,5 +56,6 @@ export type AttributeSetType = {
 
 export type InCartProductType = {
     product: ProductType,
+    selectedAttributes: number[] | [], 
     quantity: number
 }

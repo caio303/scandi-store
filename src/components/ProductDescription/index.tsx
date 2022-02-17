@@ -14,7 +14,8 @@ type ProductDescriptionProps = {
 
 export class ProductDescription extends React.Component<ProductDescriptionProps> {
     state = {
-        currentImage: 0
+        currentImage: 0,
+        supposedAttributes: this.props.currentItem?.attributes.map(item => 0) ?? [0]
     }
 
     handleChangeCurrentImage = (index: number) => {
@@ -23,9 +24,13 @@ export class ProductDescription extends React.Component<ProductDescriptionProps>
 
     handleAddProduct = (item: ProductType) => {
         if(!item.inStock) return
-        
+
+        const selecterAttrByDefault = item.attributes.map(() => 0)
+
+        const fallBack = this.state.supposedAttributes ? this.state.supposedAttributes : selecterAttrByDefault
+
         if(this.props.myCart.length === 0) {
-            this.props.setMyCart([...this.props.myCart,{product:item,quantity:1}])
+            this.props.setMyCart([...this.props.myCart,{product:item,quantity:1, selectedAttributes: fallBack}])
             return
         }
 
@@ -47,16 +52,30 @@ export class ProductDescription extends React.Component<ProductDescriptionProps>
             return
         }
 
-        this.props.setMyCart([...this.props.myCart,{product:item,quantity:1}])
+        this.props.setMyCart([...this.props.myCart,{product:item,quantity:1,selectedAttributes:fallBack}])
         
         localStorage.myCart = JSON.stringify(this.props.myCart)
     
     }
 
+    handleChangeSupposedAttribute = (attrIndex:number, optionIndex: number) => {
+        if(!this.state.supposedAttributes) return
+        
+        this.state.supposedAttributes[attrIndex] = optionIndex
+        
+        this.setState(({
+            supposedAttributes: this.state.supposedAttributes
+        }))
+        console.log(attrIndex)
+    }
+
     render() {
+
+        console.log(this.state.supposedAttributes)
 
         const descriptionDiv = document.querySelector(".pDescription-text")
         if(descriptionDiv) descriptionDiv.innerHTML = this.props.currentItem?.description?? "Product Description"
+
 
         let productCategory = ""
 
@@ -87,17 +106,30 @@ export class ProductDescription extends React.Component<ProductDescriptionProps>
                                     <div key={index} className="pAttr">
                                         <div className="title">{item.name.toUpperCase()+":"}</div>
                                         <div className="options">
-                                            {item.items.map((item2,index2,arr)=> {
+                                            {item.items.map((item2,index2)=> {
                                                     let selected = false
-                                                    if(arr[0] === item2) selected = true
                                                     
-                                                if(item.type === "swatch") {
-                                                    return <SwatchColor className={selected? "selected":""} bgColor={`${item2.value}`} key={index2}/>
-                                                }
-                                                return (
-                                                    <span className={selected? "selected":""} key={index2}>{item2.value}</span>
-                                                )
-                                            })}
+                                                    const fallBack = this.state.supposedAttributes? this.state.supposedAttributes[index] : "0"
+                                                    
+                                                    if(index2 === fallBack) selected = true
+                                                        
+                                                    if(item.type === "swatch") {
+                                                        return <SwatchColor 
+                                                                    onClick={()=>this.handleChangeSupposedAttribute(index,index2)}
+                                                                    className={selected? "selected":""} 
+                                                                    bgColor={`${item2.value}`} 
+                                                                    key={index2}
+                                                                    />
+                                                    }
+                                                    return (
+                                                        <span
+                                                            onClick={()=>this.handleChangeSupposedAttribute(index,index2)}
+                                                            className={selected? "selected":""} 
+                                                            key={index2}>{item2.value}
+                                                            </span>
+                                                    )
+                                                })
+                                            }
                                         </div>
                                     </div>
                                 )

@@ -4,7 +4,8 @@ import { Container } from "./styles"
 
 type CurrencyModalProps = {
     allCurrencies: PriceType[] | [],
-    handleCurrentCurrencyChange: Dispatch<SetStateAction<number>>
+    handleCurrentCurrencyChange: Dispatch<SetStateAction<number>>,
+    setCurrentSymbol: Dispatch<SetStateAction<string>>
 }
 
 export class CurrencyModal extends React.Component<CurrencyModalProps> {
@@ -18,7 +19,10 @@ export class CurrencyModal extends React.Component<CurrencyModalProps> {
                         this.props.allCurrencies.map((item,index)=>{
                             return  <li 
                                         key={index}
-                                        onClick={()=>this.props.handleCurrentCurrencyChange(index)}
+                                        onClick={()=>{
+                                            this.props.handleCurrentCurrencyChange(index)
+                                            this.props.setCurrentSymbol(item.currency.symbol)
+                                        }}
                                         >
                                         {item.currency.symbol} {item.currency.label}
                                     </li>

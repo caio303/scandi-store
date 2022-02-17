@@ -16,12 +16,16 @@ type HeaderProps = {
     setMyCart: Dispatch<SetStateAction<InCartProductType[] | []>>,
     isCartModalOpen: boolean,
     setIsCartModalOpen: Dispatch<SetStateAction<boolean>>,
+    isCurrModalOpen: boolean,
+    setIsCurrModalOpen: Dispatch<SetStateAction<boolean>>
     cartTotalAmount: number
 }
 
 export const Header = (props:HeaderProps) => {
 
     const [allCategories,setAllCategories] = useState<AllCategoriesNames|[]>([])
+
+    const [currentSymbol,setCurrentSymbol] = useState("$")
 
     useEffect(() => {
         try {
@@ -34,17 +38,13 @@ export const Header = (props:HeaderProps) => {
         }
     },[])
 
-    const [isCurrModalOpen,setIsCurrModalOpen] = useState(false)
-
     const toggleModal = (isOpen:boolean,setIsOpen:Dispatch<SetStateAction<boolean>>) => {
         if(!isOpen && props.isCartModalOpen) props.setIsCartModalOpen(false)
-        if(!isOpen && isCurrModalOpen) setIsCurrModalOpen(false)
+        if(!isOpen && props.isCurrModalOpen) props.setIsCurrModalOpen(false)
         setIsOpen(!isOpen)
     }
 
     const allCurrencies = allCategories[props.currentCategory]?.products[0].prices
-
-    const symbol = allCurrencies[props.currentCurrency].currency.symbol
 
     return (
             <Container>
@@ -63,13 +63,15 @@ export const Header = (props:HeaderProps) => {
                 </nav>
                 <nav id="currency-cart">
                     <div 
-                        onClick={()=>toggleModal(isCurrModalOpen,setIsCurrModalOpen)}
+                        onClick={()=>toggleModal(props.isCurrModalOpen,props.setIsCurrModalOpen)}
                     >
-                        {symbol}<i className={`fas fa-angle-down ${isCurrModalOpen? "spin":''}`}></i>
-                        {isCurrModalOpen &&
+                        {currentSymbol}
+                        <i className={`fas fa-angle-down ${props.isCurrModalOpen? "spin":''}`}></i>
+                        {props.isCurrModalOpen &&
                             <CurrencyModal 
                                 allCurrencies={allCurrencies}
                                 handleCurrentCurrencyChange={props.handleCurrencyChange}
+                                setCurrentSymbol={setCurrentSymbol}
                                 />
                         }
                     </div>
