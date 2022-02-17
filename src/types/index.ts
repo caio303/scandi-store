@@ -6,6 +6,18 @@ export type PriceType = {
     amount: number
 }
 
+export type AllCategoriesNames = [
+    {
+        name: string
+        products: [
+            {
+                prices: PriceType[]
+            }
+        ]
+        
+    }
+]
+
 export type ProductType = {
     attributes: AttributeSetType[],
     brand: string,

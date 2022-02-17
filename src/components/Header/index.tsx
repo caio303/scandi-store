@@ -1,12 +1,15 @@
 import { useState,useEffect,Dispatch,SetStateAction } from "react"
-import { CurrencyType,InCartProductType } from "../../types"
+import { AllCategoriesNames,InCartProductType } from "../../types"
+import { CategoriesAndCurrenciesQuery } from "../../gqlQueries"
+import { consumeApi } from "../../utils/consumeApi"
 import { CartModal } from "../CartModal"
 import { CurrencyModal } from "../CurrencyModal"
 import { Container } from "./styles"
+import { Link } from "react-router-dom"
 
 type HeaderProps = {
-    allCurrencies: CurrencyType[] | undefined,
-    currentCategory: string,
+    currentCategory: number,
+    setCurrentCategory: Dispatch<SetStateAction<number>>
     currentCurrency: number,
     handleCurrencyChange: Dispatch<SetStateAction<number>>,
     myCart: InCartProductType[] | [],
@@ -18,21 +21,16 @@ type HeaderProps = {
 
 export const Header = (props:HeaderProps) => {
 
-    const [all,setAll] = useState('')
-    const [tech,setTech] = useState('')
-    const [clothes,setClothes] = useState('')
+    const [allCategories,setAllCategories] = useState<AllCategoriesNames|[]>([])
 
-    useEffect(()=>{
-        switch (props.currentCategory) {
-            case "all":
-                setAll("active")
-                break;
-            case "tech":
-                setTech("active")
-                break;
-            case "clothes":
-                setClothes("active")
-                break;
+    useEffect(() => {
+        try {
+            consumeApi(CategoriesAndCurrenciesQuery)
+                .then(
+                    (data) => setAllCategories(data.data.categories)
+                )
+        }catch(e) {
+            console.error(e)
         }
     },[])
 
@@ -44,14 +42,24 @@ export const Header = (props:HeaderProps) => {
         setIsOpen(!isOpen)
     }
 
-    const symbol = props.allCurrencies? props.allCurrencies[props.currentCurrency].symbol : "$"
+    const allCurrencies = allCategories[props.currentCategory]?.products[0].prices
+
+    const symbol = allCurrencies[props.currentCurrency].currency.symbol
 
     return (
             <Container>
-                <nav>        
-                    <div className={all}><a href="/products/all">ALL</a></div>
-                    <div className={tech}><a href="/products/tech">TECH</a></div>
-                    <div className={clothes}><a href="/products/clothes">CLOTHES</a></div>
+                <nav>
+                    {allCategories && allCategories.map((item,index)=> {
+                        return <div 
+                                className={props.currentCategory === index? "active" : ""}
+                                key={index}>
+                            <Link
+                                    onClick={()=>props.setCurrentCategory(index)}
+                                    to={`/products/${item.name}`}>
+                                {item.name.toUpperCase()}
+                            </Link>
+                        </div>
+                    })}
                 </nav>
                 <nav id="currency-cart">
                     <div 
@@ -60,7 +68,7 @@ export const Header = (props:HeaderProps) => {
                         {symbol}<i className={`fas fa-angle-down ${isCurrModalOpen? "spin":''}`}></i>
                         {isCurrModalOpen &&
                             <CurrencyModal 
-                                allCurrencies={props.allCurrencies}
+                                allCurrencies={allCurrencies}
                                 handleCurrentCurrencyChange={props.handleCurrencyChange}
                                 />
                         }

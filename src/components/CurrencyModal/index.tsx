@@ -1,9 +1,9 @@
 import React, { Dispatch, SetStateAction } from "react"
-import { CurrencyType } from "../../types"
+import { PriceType } from "../../types"
 import { Container } from "./styles"
 
 type CurrencyModalProps = {
-    allCurrencies: CurrencyType[] | undefined,
+    allCurrencies: PriceType[] | [],
     handleCurrentCurrencyChange: Dispatch<SetStateAction<number>>
 }
 
@@ -20,7 +20,7 @@ export class CurrencyModal extends React.Component<CurrencyModalProps> {
                                         key={index}
                                         onClick={()=>this.props.handleCurrentCurrencyChange(index)}
                                         >
-                                        {item.symbol} {item.label}
+                                        {item.currency.symbol} {item.currency.label}
                                     </li>
                         })
                     }

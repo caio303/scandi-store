@@ -70,10 +70,6 @@ export const Container = styled.li`
         &.selected {
             background-color: var(--text-black);
             color: #fff;
-            
-            &:hover {
-                filter: brightness(80%)
-            }
         }
     }
 

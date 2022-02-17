@@ -6,6 +6,7 @@ import { useState,useEffect } from 'react';
 import { InCartProductType } from './types';
 import { CartPage } from './pages/CartPage';
 import { ProductDescriptionPage } from './pages/ProductDescriptionPage';
+import { Header } from './components/Header';
 
 export function App() {
 
@@ -16,6 +17,8 @@ export function App() {
     const [isCartModalOpen,setIsCartModalOpen] = useState(false)
 
     const [totalAmount,setTotalAmount] = useState(0)
+
+    const [currentCategory, setCurrentCategory] = useState(0)
 
     useEffect(()=>{
       if(localStorage.myCart !== null) {
@@ -41,6 +44,17 @@ export function App() {
 
     return (
       <>
+        <Header 
+            currentCategory={currentCategory}
+            setCurrentCategory={setCurrentCategory}
+            currentCurrency={currentCurrency}
+            cartTotalAmount={totalAmount}
+            handleCurrencyChange={setCurrentCurrency}
+            myCart={cart}
+            setMyCart={setCart}
+            setIsCartModalOpen={setIsCartModalOpen}
+            isCartModalOpen={isCartModalOpen}
+        />
         <Routes>
             <Route path="/products/:slug" element={<CategoryPage 
                                                     currentCurrency={currentCurrency}

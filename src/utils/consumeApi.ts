@@ -1,4 +1,7 @@
-export const consumeApi = async (gqlEndpoint:string,query:string) => {
+export const consumeApi = async (query:string) => {
+    
+    const gqlEndpoint = "http://localhost:4000/grqphql"
+    
     const response = await fetch(gqlEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},

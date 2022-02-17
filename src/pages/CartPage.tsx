@@ -1,7 +1,5 @@
-import { Header } from "../components/Header"
-import { consumeApi } from "../utils/consumeApi"
-import { Dispatch,SetStateAction,useEffect,useState } from 'react'
-import { InCartProductType,CurrencyType,DataType } from '../types/index'
+import { Dispatch,SetStateAction } from 'react'
+import { InCartProductType } from '../types/index'
 import { CartShowCase } from "../components/CartShowCase"
  
 
@@ -16,38 +14,6 @@ type CartPageProps = {
 }
 
 export const CartPage = (props: CartPageProps) => {
-    
-    const [data,setData] = useState<DataType>()
-
-    const query = `query {
-        category(input:{title:"all"}) {
-          name,
-          products {
-            prices {
-              currency {
-                label,
-                symbol
-              }
-            }
-          }
-        }
-      }`
-
-    useEffect(()=> {
-        try {
-            consumeApi("http://localhost:4000",query).then(
-                (data) => setData(data.data)
-            )
-          }catch(e) {
-            console.warn(e)
-          }
-    },[])
-
-    let currencies: CurrencyType[] | undefined
-
-    currencies = data?.category.products[0].prices.map((item,index) => {
-      return item.currency
-    })
 
     let currencySymbol = "$"
 
@@ -55,25 +21,14 @@ export const CartPage = (props: CartPageProps) => {
 
     return (
         <>
-            <Header 
-              currentCategory={"all"} 
-              allCurrencies={currencies}
-              currentCurrency={props.currentCurrency}
-              handleCurrencyChange={props.handleCurrencyChange}
+            <CartShowCase 
+              currencySymbol={currencySymbol}
               myCart={props.myCart}
               setMyCart={props.setMyCart}
+              currentCurrency={props.currentCurrency}
               isCartModalOpen={props.isCartModalOpen}
               setIsCartModalOpen={props.setIsCartModalOpen}
-              cartTotalAmount={props.cartTotalAmount}
               />
-              <CartShowCase 
-                currencySymbol={currencySymbol}
-                myCart={props.myCart}
-                setMyCart={props.setMyCart}
-                currentCurrency={props.currentCurrency}
-                isCartModalOpen={props.isCartModalOpen}
-                setIsCartModalOpen={props.setIsCartModalOpen}
-                />
         </>
     )
 }
