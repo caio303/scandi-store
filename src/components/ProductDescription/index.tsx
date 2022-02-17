@@ -68,16 +68,9 @@ export class ProductDescription extends React.Component<ProductDescriptionProps>
         this.setState(({
             supposedAttributes: this.state.supposedAttributes
         }))
-        console.log(attrIndex)
     }
 
     render() {
-
-        console.log(this.state.supposedAttributes)
-
-        const descriptionDiv = document.querySelector(".pDescription-text")
-        if(descriptionDiv) descriptionDiv.innerHTML = this.props.currentItem?.description?? "Product Description"
-
 
         let productCategory = ""
 
@@ -161,7 +154,12 @@ export class ProductDescription extends React.Component<ProductDescriptionProps>
                         </button>
                     }
                     
-                    <div className="pDescription-text"></div>
+                    <div className="pDescription-text" 
+                        dangerouslySetInnerHTML={
+                            this.props.currentItem !== undefined ? {__html: this.props.currentItem.description} : {__html: ""}
+                        }
+                        >
+                    </div>
                 </div>
             </Container>
         )

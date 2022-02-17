@@ -1,7 +1,6 @@
 import { Dispatch,SetStateAction } from 'react'
 import { InCartProductType } from '../types/index'
 import { CartShowCase } from "../components/CartShowCase"
-import { printIntrospectionSchema } from 'graphql'
  
 
 type CartPageProps = {
