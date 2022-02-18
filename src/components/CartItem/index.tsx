@@ -9,7 +9,6 @@ type CartItemProps = {
     itemName: string,
     itemQuantity: number,
     itemAmount: number,
-    itemImage: string,
     currencySymbol: string,
     currencyAmount: number,
     myCart: InCartProductType[] | [],
@@ -18,6 +17,10 @@ type CartItemProps = {
 }
 
 export class CartItem extends React.Component<CartItemProps> {
+
+    state = {
+        imageIndex: 0 
+    }
 
     handleReduceQuantity = (cartItem: InCartProductType) => {
         
@@ -68,7 +71,22 @@ export class CartItem extends React.Component<CartItemProps> {
 
     }
 
+    handleChangeImageIndex = (change: number) => {
+        console.log("rodou")
+        if(
+            this.state.imageIndex + change < 0 
+            || 
+            this.state.imageIndex + change >= this.props.currentItem.product.gallery.length
+        ) return
+        
+        this.setState(({imageIndex: this.state.imageIndex + change}))
+    }
+
     render() {
+
+        
+
+
         return (
             <Container className={this.props.liSize === "lg"?"lg":""}>
                 <div className="pLeft">
@@ -80,7 +98,7 @@ export class CartItem extends React.Component<CartItemProps> {
                                 (this.props.currencyAmount.toFixed(2))
                             }</div>
                     <div className="pAttr">
-                        {this.props.liSize === "lg" &&
+                        {this.props.liSize === "lg" && this.props.currentItem.product.attributes.length > 0 &&
                             <div className="attr-name">
                                 {this.props.currentItem.product.attributes[0].name}
                             </div>
@@ -117,11 +135,29 @@ export class CartItem extends React.Component<CartItemProps> {
 
                     </div>
                     <div className="pImg">
-                        <Link to={`/product/${this.props.currentItem.product.id}`}>
-
-                            <img alt={this.props.itemName} src={this.props.itemImage} height="100"/>
                         
+                        {this.props.liSize === "lg" && this.props.currentItem.product.gallery.length > 1 &&
+                            <div 
+                                onClick={()=>this.handleChangeImageIndex(-1)}
+                                className="arrow-left"
+                                >
+                                <img src="/arrow-left.svg" alt="Arrow Left" />
+                            </div>
+                        }
+                        
+                        <Link to={`/product/${this.props.currentItem.product.id}`}>                            
+                            <img alt={this.props.itemName} src={this.props.currentItem.product.gallery[this.state.imageIndex]} height="100"/>
                         </Link>
+                    
+                        {this.props.liSize === "lg" && this.props.currentItem.product.gallery.length > 1 &&
+                            <div
+                                onClick={()=>this.handleChangeImageIndex(1)} 
+                                className="arrow-right"
+                                >
+                                <img src="/arrow-left.svg" alt="Arrow Left" />
+                            </div>
+                        }
+                        
                     </div>
                 </div>
             </Container>

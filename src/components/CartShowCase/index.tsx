@@ -1,6 +1,7 @@
 import { CartItem } from "../CartItem"
-import React, { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction } from "react"
 import { InCartProductType } from "../../types"
+import styled from 'styled-components'
 import { Container } from "./styles"
 import { Link } from "react-router-dom"
 
@@ -14,32 +15,32 @@ type CartShowCaseProps = {
     setIsCurrModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export class CartShowCase extends React.Component<CartShowCaseProps> {
+export const CartShowCase = (props: CartShowCaseProps) => {
 
-    render() {
-        if(this.props.myCart.length > 0) {
+        if(props.myCart.length > 0) {
+
             return (
                 <Container 
-                    className={this.props.isCartModalOpen? "cartModal-open":""}
+                    className={props.isCartModalOpen? "cartModal-open":""}
                     onClick={()=>{
-                        this.props.setIsCartModalOpen(false)
-                        this.props.setIsCurrModalOpen(false)
+                        props.setIsCartModalOpen(false)
+                        props.setIsCurrModalOpen(false)
                     }}
                     >
                     <h1>CART</h1>
                     <ul>
-                        {this.props.myCart.length > 0 && this.props.myCart.map((item,index)=> {
+                        {props.myCart.length > 0 && props.myCart.map((item,index)=> {
+                                    
                                 return <CartItem 
                                             key={index}
                                             liSize="lg"
                                             itemName={item.product.name}
                                             itemQuantity={item.quantity}
-                                            currencyAmount={item.product.prices[this.props.currentCurrency].amount}
-                                            currencySymbol={this.props.currencySymbol}
-                                            itemAmount={item.product.prices[this.props.currentCurrency].amount}
-                                            itemImage={item.product.gallery[0]}
-                                            myCart={this.props.myCart}
-                                            setMyCart={this.props.setMyCart}
+                                            currencyAmount={item.product.prices[props.currentCurrency].amount}
+                                            currencySymbol={props.currencySymbol}
+                                            itemAmount={item.product.prices[props.currentCurrency].amount}
+                                            myCart={props.myCart}
+                                            setMyCart={props.setMyCart}
                                             currentItem={item}
                                         />
                             })}
@@ -48,12 +49,31 @@ export class CartShowCase extends React.Component<CartShowCaseProps> {
             )
         }else {
             return (
-                <Container className={this.props.isCartModalOpen? "cartModal-open":""}>
+                <Container className={props.isCartModalOpen? "cartModal-open":""}>
                     <h1>CART</h1>
-                        <h1 style={{textAlign:"center",padding:"3rem .5rem 3rem 0"}}>Your Bag is <div style={{color: "var(--active-green)"}}>empty!</div></h1>
-                        <h2 style={{textAlign:"center",padding:".4rem .5rem 0 .2rem",textDecoration:"underline"}}><Link to="/products/all">Take a look at our products!</Link></h2>
+                        <InnerContainer404>
+                            <h1>Your Bag is <div style={{color: "var(--active-green)"}}>empty!</div></h1>
+                            <h2><Link to="/products/all">Take a look at our products!</Link></h2>
+
+                        </InnerContainer404>
                 </Container>
             )
         }
     }
-}
+
+const InnerContainer404 = styled.div`
+    h1 {
+        text-align: center;
+        padding: 3rem .5rem 3rem 0;
+
+        div {
+            color: var(--active-green);
+        }
+    }
+
+    h2 {
+        text-align: center;
+        padding: .4rem .5rem 0 .2rem;
+        text-decoration: underline;
+    }
+`

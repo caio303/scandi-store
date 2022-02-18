@@ -16,6 +16,22 @@ export const Container = styled.div`
     #cartModal-list {
         font-weight: 300;
 
+        h1,h3 {
+            text-align: center;
+        }
+
+        h1 {
+            padding: 3.9rem 0 3rem 0;
+
+            div {
+                color: var(--active-green)
+            }
+        }
+
+        h2 {
+            padding-bottom: .6rem;
+        }
+
         ul {
             margin-top: 1rem;
             list-style: none;

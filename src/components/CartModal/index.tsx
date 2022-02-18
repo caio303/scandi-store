@@ -39,7 +39,6 @@ export class CartModal extends React.Component<CartModalProps> {
                                             currencyAmount={item.product.prices[this.props.currentCurrency].amount}
                                             currencySymbol={currencySymbol}
                                             itemAmount={item.product.prices[this.props.currentCurrency].amount}
-                                            itemImage={item.product.gallery[0]}
                                             myCart={this.props.myCart}
                                             setMyCart={this.props.setMyCart}
                                             currentItem={item}
@@ -62,8 +61,8 @@ export class CartModal extends React.Component<CartModalProps> {
                 <Container>
                     <h2>My Bag,&nbsp;<span>0 items :(</span></h2>
                     <div id="cartModal-list">
-                        <h1 style={{textAlign:"center",padding:"3.9rem 0 3rem 0"}}>Your Bag is <div style={{color: "var(--active-green)"}}>empty!</div></h1>
-                        <h3 style={{textAlign:"center",paddingBottom:".6rem"}}>Take a look at our products!</h3>
+                        <h1>Your Bag is <div>empty!</div></h1>
+                        <h3>Take a look at our products!</h3>
                     </div>
                 </Container>
             )

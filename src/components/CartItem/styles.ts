@@ -46,12 +46,61 @@ export const Container = styled.li`
             width: 6.5rem;
             height: 100%;
             position: relative;
+            user-select: none;
             
             a>img {
                 height: 6.25rem; 
                 position: absolute;
                 left: 50%;
                 transform: translateX(-50%); 
+            }
+
+            .arrow-left {
+                position: absolute;
+                background-color: rgba(16,16,16,0.4);
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%) translateX(-275%);
+                z-index: 6;
+                height: 2.8rem;
+                padding: .4rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+
+                img {
+                    width: .65rem;
+                }
+
+                &:hover {
+                    background-color: rgba(16,16,16,0.5);
+                }
+            }
+
+            .arrow-right {
+                position: absolute;
+                background-color: rgba(16,16,16,0.4);
+                padding: .6rem;
+                top: 50%;
+                right: 0;
+                transform: translateY(-50%) translateX(275%);
+                z-index: 6;
+                height: 2.8rem;
+                padding: .4rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                
+                img {
+                    width: .65rem;
+                    transform: rotate(180deg);
+                }
+
+                &:hover {
+                    background-color: rgba(16,16,16,0.5);
+                }
             }
         }
     }
